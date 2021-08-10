@@ -4,24 +4,31 @@ import { Link as RouterLink} from 'react-router-dom'
 import {
     Drawer,
     DrawerBody,
-    DrawerFooter,
+    // DrawerFooter,
     DrawerHeader,
     DrawerOverlay,
     DrawerContent,
     DrawerCloseButton,
-    color,
+    // color,
     Icon,
     IconButton,
     useDisclosure,
-    Heading,
     Link,
-    Box
+    Box,
+    LinkProps,
+    forwardRef
   } from "@chakra-ui/react"
 import { useRef } from "react"
 
 export default function MenuDrawer(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
     const hamburgerRef = useRef(null)
+
+    const HamburgerLink = forwardRef<LinkProps, "div">((props, ref) => (
+      <Box m="3vw">
+        <Link as={RouterLink} onClick={onClose} variant="hamburger" {...props}/>
+      </Box>
+    ))
 
     return (
     <>
@@ -42,20 +49,12 @@ export default function MenuDrawer(): JSX.Element {
         <DrawerContent>
           <DrawerCloseButton/>
           <DrawerHeader color="primary" borderBottomWidth="1px">what's on the menu?</DrawerHeader>
-          <DrawerBody>
-            {/* <Link as={RouterLink} to="/" fontSize="xl" fontWeight="bold" ml="6vw">Recipes</Link> */}
-            <Box m="3vw">
-              <Link to="/" fontSize="xl" fontWeight="bold">Recipes</Link>
-            </Box>
-            <Box m="3vw">
-            <Link to="/favourites" fontSize="xl" fontWeight="bold">Favourites</Link>
-            </Box>
-            <Box m="3vw">
-            <Link to="/plan" fontSize="xl" fontWeight="bold">Plan</Link>
-            </Box>
-            <Box m="3vw">
-            <Link to="/add" fontSize="xl" fontWeight="bold">Add</Link>
-            </Box>
+          <DrawerBody variant="hamburger">
+            <HamburgerLink to="/">Recipes</HamburgerLink>
+            <HamburgerLink to="/favourites">Favourites</HamburgerLink>
+            <HamburgerLink to="/plan">Plan</HamburgerLink>
+            <HamburgerLink to="/add">Add</HamburgerLink>
+        
             <Box mt="10vh">
               User info here
             </Box>

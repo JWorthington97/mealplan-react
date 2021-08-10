@@ -1,6 +1,4 @@
-import { HamburgerIcon } from "@chakra-ui/icons"
-import { Box, Flex, Heading, Icon, IconButton, Spacer } from '@chakra-ui/react'
-import { useRef } from "react"
+import { Flex, Heading, Icon, IconButton, Spacer } from '@chakra-ui/react'
 import { GiMeal, GiBanana } from "react-icons/gi"
 import MenuDrawer from "./MenuDrawer"
 

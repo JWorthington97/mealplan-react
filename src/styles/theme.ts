@@ -1,5 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
 import { headingStyles as Heading } from "./headingStyles";
+import { linkStyles as Link } from "./linkStyles";
 
 export const theme = extendTheme({
     colors:{
@@ -7,5 +8,6 @@ export const theme = extendTheme({
     },
     components:{
         Heading,
+        Link
     }
 });
