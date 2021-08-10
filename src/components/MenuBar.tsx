@@ -1,14 +1,13 @@
 import { HamburgerIcon } from "@chakra-ui/icons"
 import { Box, Flex, Heading, Icon, IconButton, Spacer } from '@chakra-ui/react'
+import { useRef } from "react"
 import { GiMeal, GiBanana } from "react-icons/gi"
+import MenuDrawer from "./MenuDrawer"
 
 export default function MenuBar(): JSX.Element {
-    return <Flex mx="1vw">
-        <IconButton 
-        aria-label="Open hamburger menu"
-        m="auto"
-        icon={<Icon as={HamburgerIcon} h={8} w={8} color="primary"/>}
-        />
+    
+    return <Flex mx="2vw">
+        <MenuDrawer />
         <Spacer />
         <Flex>
             <Icon as={GiMeal} color="primary" h={55} w={55} ml="1vw"/>
