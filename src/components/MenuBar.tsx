@@ -1,39 +1,26 @@
-import { Box, Heading, Flex, Icon, Spacer, Button, useColorMode, IconButton} from '@chakra-ui/react'
-import styled from 'styled-components'
-import { GiMeal } from 'react-icons/gi'
-import { MoonIcon, SunIcon} from '@chakra-ui/icons'
+import { HamburgerIcon } from "@chakra-ui/icons"
+import { Box, Flex, Heading, Icon, IconButton, Spacer } from '@chakra-ui/react'
+import { GiMeal, GiBanana } from "react-icons/gi"
 
 export default function MenuBar(): JSX.Element {
-    const { colorMode, toggleColorMode} = useColorMode()
-    return <Flex border="2px"> 
-        <Flex border="2px">
-            <Icon as={GiMeal} color="#38B2AC" h={50} w={50}/>
-            <Heading color="#38B2AC" margin="auto">mealplan</Heading>
-        </Flex> 
+    return <Flex mx="1vw">
+        <IconButton 
+        aria-label="Open hamburger menu"
+        m="auto"
+        icon={<Icon as={HamburgerIcon} h={8} w={8} color="primary"/>}
+        />
         <Spacer />
-        <Flex margin="auto" border="1px" textAlign="center">
-            <MenuHeading  mr="2vw">Recipes</MenuHeading>
-            <MenuHeading size="md" mr="2vw">Favourites</MenuHeading>
-            <MenuHeading size="md" mr="2vw">Plan</MenuHeading>
-            <MenuHeading  size="md">Add</MenuHeading>
+        <Flex>
+            <Icon as={GiMeal} color="primary" h={55} w={55} ml="1vw"/>
+            <Heading color="primary" margin="auto">mealplan</Heading> 
         </Flex>
         <Spacer />
-        <Box margin="auto">
-            Welcome @user
-            <Button color="#38B2AC" variant="ghost">Sign Out</Button> 
-            <IconButton 
-            icon={colorMode === "light" ? < SunIcon /> : <MoonIcon />}
-            aria-label="Color mode switcher"
-            variant="outline"
-            onClick={toggleColorMode}>
-            </IconButton>
-            
-        </Box>
-    </Flex>
-    
-}
-
-const MenuHeading = styled(Heading)`
-    color: #38B2AC;
-    size: "md"
-`
+        <IconButton 
+            aria-label="Go to profile" 
+            backgroundColor="#fdca96"
+            m="auto"
+            borderRadius="50%"
+            icon={<Icon as={GiBanana} h={6} w={6} m="2vw" color="#fdfd96"/>} 
+            />
+    </Flex> 
+} 
