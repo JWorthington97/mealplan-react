@@ -8,7 +8,7 @@ export const linkStyles = {
         hamburger: {
             fontSize:"xl",
             fontWeight:"bold",
-        } 
+        }
     },
     // The default `size` or `variant` values
     defaultProps: {},
