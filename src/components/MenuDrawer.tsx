@@ -42,19 +42,18 @@ export default function MenuDrawer(): JSX.Element {
       <Drawer
         isOpen={isOpen}
         placement="left"
-        onClose={onClose}
+        onClose={onClose} 
         finalFocusRef={hamburgerRef}
       >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton/>
           <DrawerHeader color="primary" borderBottomWidth="1px">what's on the menu?</DrawerHeader>
-          <DrawerBody variant="hamburger">
+          <DrawerBody>
             <HamburgerLink to="/">Recipes</HamburgerLink>
             <HamburgerLink to="/favourites">Favourites</HamburgerLink>
             <HamburgerLink to="/plan">Plan</HamburgerLink>
-            <HamburgerLink to="/add">Add</HamburgerLink>
-        
+            <HamburgerLink to="/add">Add</HamburgerLink>    
             <Box mt="10vh">
               User info here
             </Box>

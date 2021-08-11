@@ -1,15 +1,17 @@
 import './App.css';
 // import MenuBarv1 from './components/MenuBarv1';
 import MenuBar from './components/MenuBar';
-import { Box, Divider } from '@chakra-ui/react'
+import { Box, Divider, Heading } from '@chakra-ui/react'
 import { BrowserRouter as Router,
   Switch,
   Route,
   // Link 
 } from 'react-router-dom'
+import RecipeHome from './components/Recipes/RecipeHome';
 
 function App() {
   return (
+    <Box width="100%" maxWidth="900px" margin="auto">
     <Router>
       <Box>
     {/* <MenuBarv1 /> */}
@@ -28,11 +30,13 @@ function App() {
           <Box textAlign="center" m="auto">Favourites</Box>
         </Route>
         <Route path="/">
-          <Box textAlign="center">Recipes</Box>
+          <Heading size="md" textAlign="center" mt="1vw">Weekly Recommendations</Heading>
+          <RecipeHome />
         </Route>
       </Switch>
     </Router>
-  );
+    </Box>
+  ); 
 }
 
-export default App; 
+export default App;  
