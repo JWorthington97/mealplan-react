@@ -20,12 +20,12 @@ export default function ShowRecipes(): JSX.Element {
     
     
     return ( 
-        <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+        <Grid templateColumns="repeat(2, 1fr)" gap={3}>
         {recipes.map((recipe) => {
             return <Box key={recipe.id}>
                 <Box w="40vw" m="auto">
                 {/* div with background image set instead */}
-                    <Image src={recipe.image_url} boxSize="40vw" objectFit="cover" borderRadius="10"></Image>
+                    <Image src={recipe.image_url} boxSize="40vw" boxShadow="lg" objectFit="cover" borderRadius="10"></Image>
                     <Flex>
                         <Heading fontSize="sm">{recipe.name}</Heading> 
                         <Flex m="1vw">
@@ -36,7 +36,7 @@ export default function ShowRecipes(): JSX.Element {
                 </Box> 
             </Box>
         })}
-    </Grid>
+    </Grid> 
     )
  
 } 
