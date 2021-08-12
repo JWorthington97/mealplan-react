@@ -9,7 +9,7 @@ import { BrowserRouter as Router,
 } from 'react-router-dom'
 import RecipeHome from './components/Recipes/RecipeHome';
 
-function App() {
+function App() { 
   return (
     <Box width="100%" maxWidth="900px" margin="auto">
     <Router>
@@ -28,6 +28,9 @@ function App() {
         </Route>
         <Route path="/favourites">
           <Box textAlign="center" m="auto">Favourites</Box>
+        </Route>
+        <Route path="/admin">
+          <Box textAlign="center" m="auto">Admin</Box>
         </Route>
         <Route path="/">
           <Heading size="md" textAlign="center" mt="1vw">Weekly Recommendations</Heading>

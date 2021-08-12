@@ -3,7 +3,6 @@ import { GiMeal, GiBanana } from "react-icons/gi"
 import MenuDrawer from "./MenuDrawer"
 
 export default function MenuBar(): JSX.Element {
-    
     return <Flex mx="2vw">
         <MenuDrawer />
         <Spacer />

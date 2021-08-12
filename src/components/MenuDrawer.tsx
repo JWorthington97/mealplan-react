@@ -1,15 +1,14 @@
 import { HamburgerIcon } from "@chakra-ui/icons"
 import { Link as RouterLink} from 'react-router-dom'
+import { useRef } from "react"
 
 import {
     Drawer,
     DrawerBody,
-    // DrawerFooter,
     DrawerHeader,
     DrawerOverlay,
     DrawerContent,
     DrawerCloseButton,
-    // color,
     Icon,
     IconButton,
     useDisclosure,
@@ -18,7 +17,6 @@ import {
     LinkProps,
     forwardRef
   } from "@chakra-ui/react"
-import { useRef } from "react"
 
 export default function MenuDrawer(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
