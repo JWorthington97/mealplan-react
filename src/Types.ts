@@ -12,7 +12,7 @@ export interface IRecipe {
 export interface IRecipeFormatted {
     id: number,
     name: string,
-    cuisine: string,
+    cuisine: number,
     url: string,
     image_url: string,
     tags: string[]

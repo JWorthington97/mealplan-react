@@ -2,7 +2,7 @@ import { Grid, Box, Flex, Heading, IconButton, Image} from "@chakra-ui/react"
 import { useState, useEffect } from "react"
 import { GiMeal } from "react-icons/gi"
 import { RiHeart2Line } from "react-icons/ri"
-import { ICuisine, IRecipe, IRecipeFormatted, IRecipeTags } from "../../Types" 
+import { IRecipe, IRecipeFormatted, IRecipeTags } from "../../Types" 
 
 export interface ShowRecipesProps {
     tagsChosen: IRecipeTags,
@@ -29,18 +29,16 @@ export default function ShowRecipes({tagsChosen, cuisineChosen}: ShowRecipesProp
     const trueTags = Object.keys(tagsChosen)
     .filter((chosenTag) => tagsChosen[chosenTag])
 
-    console.log(recipes[0])
-
     return ( 
         <Grid templateColumns="repeat(2, 1fr)" gap={3}>
             
         {recipes
         // Filtering on Cuisine
-        .filter((recipe) => recipe.cuisine === cuisineChosen)
+        .filter((recipe) => recipe.cuisine === parseInt(cuisineChosen) || cuisineChosen === "")
         // Filtering on Tags
         .filter((recipe) => recipe.tags
             .filter(tag => trueTags 
-            .includes(tag)).length > 0 || trueTags.length === 0)
+            .includes(tag)).length === trueTags.length || trueTags.length === 0) 
         // Mapping over fully filtered recipes
         .map((recipe) => {
             return <Box key={recipe.id}>

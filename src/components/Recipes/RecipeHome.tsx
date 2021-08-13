@@ -40,7 +40,7 @@ export default function RecipeHome(): JSX.Element {
             <Input placeholder="Search recipes..." size="xs" w="50vw"></Input> 
             <Spacer />
             {/* Need to fetch cuisines */}
-            <Select placeholder="Select cuisine" size="xs" w="40vw" onChange={(e) => setCuisineChosen(e.target.value)}> 
+            <Select placeholder="All cuisines" size="xs" w="40vw" onChange={(e) => setCuisineChosen(e.target.value)}> 
                 {cuisines.map((cuisine) => {
                     return <option key={cuisine.id} value={cuisine.id}>{cuisine.cuisine[0].toUpperCase() + cuisine.cuisine.substring(1)}</option>})}
             </Select>
