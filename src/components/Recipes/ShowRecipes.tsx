@@ -2,26 +2,47 @@ import { Grid, Box, Flex, Heading, IconButton, Image} from "@chakra-ui/react"
 import { useState, useEffect } from "react"
 import { GiMeal } from "react-icons/gi"
 import { RiHeart2Line } from "react-icons/ri"
-import { IRecipe } from "../../Types" 
+import { ICuisine, IRecipe, IRecipeFormatted, IRecipeTags } from "../../Types" 
 
-export default function ShowRecipes(): JSX.Element {
-    const [recipes, setRecipes] = useState<IRecipe[]>([])
+export interface ShowRecipesProps {
+    tagsChosen: IRecipeTags,
+    cuisineChosen: string
+}
+
+export default function ShowRecipes({tagsChosen, cuisineChosen}: ShowRecipesProps): JSX.Element {
+    const [recipes, setRecipes] = useState<IRecipeFormatted[]>([])
 
     useEffect(() => {
         const getRecipes = async () => {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/recipes`)
             const body = await response.json()
-            setRecipes(body)
+            const formatted: IRecipeFormatted[] = body.map((recipe: IRecipe) => {
+                return {...recipe, tags: recipe.tags.split(", ")}
+            })
+            setRecipes(formatted)
         }
         getRecipes()
-    }, [])
-    
-    console.log(recipes) 
-    
-    
+    }, []) 
+
+
+
+    const trueTags = Object.keys(tagsChosen)
+    .filter((chosenTag) => tagsChosen[chosenTag])
+
+    console.log(recipes[0])
+
     return ( 
         <Grid templateColumns="repeat(2, 1fr)" gap={3}>
-        {recipes.map((recipe) => {
+            
+        {recipes
+        // Filtering on Cuisine
+        .filter((recipe) => recipe.cuisine === cuisineChosen)
+        // Filtering on Tags
+        .filter((recipe) => recipe.tags
+            .filter(tag => trueTags 
+            .includes(tag)).length > 0 || trueTags.length === 0)
+        // Mapping over fully filtered recipes
+        .map((recipe) => {
             return <Box key={recipe.id}>
                 <Box w="40vw" m="auto">
                 {/* div with background image set instead */}

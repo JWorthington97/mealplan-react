@@ -1,8 +1,9 @@
-import { Grid, Box, Flex, Heading, IconButton, Tag, Image } from '@chakra-ui/react'
+import { Grid, Box, Flex, Heading, IconButton, Image } from '@chakra-ui/react'
 import { useState, useEffect } from 'react'
 import { GiMeal } from 'react-icons/gi'
 import { RiHeart2Line } from 'react-icons/ri'
 import { IRecipe } from '../../Types'
+import { RecipeTag } from '../Misc/RecipeTag'
 
 export default function ShowSpecials(): JSX.Element {
     const [specials, setSpecials] = useState<IRecipe[]>([])
@@ -28,9 +29,12 @@ export default function ShowSpecials(): JSX.Element {
                     <IconButton aria-label="Add to mealplan" backgroundColor="teal" icon={<GiMeal color="#66CCB5" />} size="sm"  />
                 </Flex>
             </Flex>
-            {recipe.tags.split(", ").map((tag) => {
-               return <Tag key={tag} size="sm" fontSize="xs" fontWeight="bold" m="1vw" backgroundColor="lightseagreen">{tag}</Tag>
+            <Flex flexWrap="wrap"> 
+            {recipe.tags.split(", ").sort().map((tag) => {
+               return <RecipeTag tagVariant={tag} key={tag} isSelected={true} />
             })}
+            </Flex>
+            
         </Box> 
     })}
 </Grid>
