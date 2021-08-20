@@ -10,8 +10,11 @@ export const postFavourites = async (recipeID: number, userID: string) => {
         },
         body: JSON.stringify({recipeID, userID})
       })
-    
+  
     if (response.status === 201) {
         window.alert("Favourite added!")
     }
+    else {
+      window.alert("Already in your favourites!")
+    } 
 }
