@@ -18,7 +18,6 @@ export default function RecipeHome(): JSX.Element {
     leftovers: false,
   });
   
-
   useEffect(() => {
     const getCuisines = async () => {
       const response = await fetch(
@@ -29,9 +28,10 @@ export default function RecipeHome(): JSX.Element {
     };
     getCuisines();
   }, []);
-
+   
   return (
     <>
+      
       <ShowSpecials />
       <Heading textAlign="left" ml="2vw"> 
         Recipes
