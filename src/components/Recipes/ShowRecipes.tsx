@@ -1,10 +1,9 @@
 import { Grid, Box, Flex, Heading, IconButton, Image } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { GiMeal } from "react-icons/gi";
-import { RiHeart2Line } from "react-icons/ri";
 import { IRecipe, IRecipeFormatted, ShowRecipesProps } from "../../Types";
-import { postFavourites } from "../Favourites/postFavourites";
 import firebase from "firebase";
+import FavouritesButton from "../Favourites/FavouritesButton";
 
 export default function ShowRecipes({
   tagsChosen,
@@ -12,6 +11,7 @@ export default function ShowRecipes({
   recipeSearch
 }: ShowRecipesProps): JSX.Element {
   const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
+  const user = firebase.auth().currentUser
 
   useEffect(() => {
     const getRecipes = async () => {
@@ -53,11 +53,11 @@ export default function ShowRecipes({
         .map((recipe) => {
           return (
             <Box key={recipe.id}>
-              <Box w="45vw" m="auto">
+              <Box w={["45vw", "45vw", "45vw", "20vw"]} m="auto">
                 {/* div with background image set instead */}
                 <Image
                   src={recipe.image_url}
-                  boxSize="45vw"
+                  boxSize={["45vw", "45vw", "45vw", "20vw"]}
                   boxShadow="lg"
                   objectFit="cover"
                   borderTopRadius="10"
@@ -66,18 +66,13 @@ export default function ShowRecipes({
                 <Flex>
                   <Heading fontSize="sm">{recipe.name}</Heading>
                   <Flex m="1vw">
+                    <FavouritesButton recipeId={recipe.id} 
+                    // postFavourites={postFavourites} 
+                    /> 
                     <IconButton
-                      aria-label="Add to favourites"
-                      backgroundColor="mediumorchid" 
-                      icon={<RiHeart2Line />}
-                      size="sm"
-                      mr="1vw"
-                      onClick={() => postFavourites(recipe.id, firebase.auth().currentUser?.uid || "")}// NEED TO CHANGE THIS 
-                    />
-                    <IconButton
-                      aria-label="Add to mealplan" 
+                      aria-label="Add to mealplan"   
                       backgroundColor="teal"
-                      icon={<GiMeal color="#66CCB5" />}
+                      icon={<GiMeal color="#66CCB5" />} 
                       size="sm"
                     />
                   </Flex>

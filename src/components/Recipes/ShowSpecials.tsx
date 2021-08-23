@@ -22,10 +22,10 @@ export default function ShowSpecials(): JSX.Element {
     <Grid overflowX="auto" gridAutoFlow="column">
       {specials.map((recipe) => {
         return (
-          <Box w="45vw" m="2vw" key={recipe.id} >
+          <Box w={["45vw", "45vw", "45vw", "20vw"]} m="2vw" key={recipe.id} >
             <Image
               src={recipe.image_url}
-              boxSize="45vw"
+              boxSize={["45vw", "45vw", "45vw", "20vw"]}
               objectFit="cover"
               borderTopRadius="10"
               onClick={() => window.open(recipe.url)} 

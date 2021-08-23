@@ -3,10 +3,6 @@ import { StyledFirebaseAuth } from "react-firebaseui";
 import firebase from 'firebase';
 import { Box, Heading } from "@chakra-ui/react";
 
-
-// Initialize Firebase
-
-
 const uiConfig = {
     // Popup signin flow rather than redirect flow.
     signInFlow: 'popup',
@@ -18,13 +14,11 @@ const uiConfig = {
   };
 
 function SignInScreen() {
-    const user = firebase.auth().currentUser
-
     return (
-      <Box>
-        {user ? <Heading>Already Signed In!</Heading> :
-         <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />}
-        
+      <Box textAlign="center">
+         {firebase.auth().currentUser ? 
+          <Heading> Already Signed In!</Heading> : 
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />}
       </Box>
     );
 }

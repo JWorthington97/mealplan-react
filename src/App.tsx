@@ -1,7 +1,7 @@
 import "./App.css";
 // import MenuBarv1 from './components/MenuBarv1';
 import MenuBar from "./components/MenuBar";
-import { Box, Divider, Heading } from "@chakra-ui/react";
+import { Box, Divider, Heading, Spinner } from "@chakra-ui/react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,35 +9,46 @@ import {
   // Link
 } from "react-router-dom";
 import RecipeHome from "./components/Recipes/RecipeHome";
-import SignInScreen from "./components/Admin/Firebase";
+import SignInScreen from "./Firebase/SignIn";
 
 import firebase from 'firebase';
 import "firebase/auth"
 import { firebaseConfig } from "./Firebase/config"; 
+import { useEffect, useState } from "react";
 
-export const firebaseApp = firebase.initializeApp(firebaseConfig); 
+export const firebaseApp = firebase.initializeApp(firebaseConfig);  
 
 
-function App() {
+function App() { 
+  const [isLoading, setIsLoading] = useState(true)
+  // const [user, setUser] = useState<firebase.User | null>(null);
   
+    useEffect(() => {
+      const unsubscribe = firebase.auth().onAuthStateChanged(() => {setIsLoading(false)});
+      return unsubscribe;
+    }, []);
+
+    if (isLoading) {
+      return <Spinner left="50%" color="primary"/>
+    } 
+  
+   
+
   return (
       <Box width="100%" maxWidth="900px" margin="auto">
         <Router>
           <Box>
-            {/* <MenuBarv1 /> */}
             <MenuBar />
-            <Divider orientation="horizontal" />
+            <Divider orientation="horizontal" /> 
           </Box>
           <Switch>
           <Route path="/signin">
               <SignInScreen />
-              {/* insert function to load each page here */}
             </Route>
             <Route path="/add">
               <Box textAlign="center" m="auto">
                 Add
               </Box>
-              {/* insert function to load each page here */}
             </Route>
             <Route path="/plan">
               <Box textAlign="center" m="auto">
