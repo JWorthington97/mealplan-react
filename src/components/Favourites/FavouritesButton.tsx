@@ -1,7 +1,6 @@
 import { IconButton, useToast } from "@chakra-ui/react";
 import { RiHeart2Line } from "react-icons/ri";
 import firebase from "firebase";
-import { useState } from "react";
 import { postFavourites } from '../Favourites/postFavourites'
 
 interface FavouritesButtonProps {
