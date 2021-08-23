@@ -5,6 +5,7 @@ import { RiHeart2Line } from "react-icons/ri";
 import { IRecipe, IRecipeFormatted, ShowRecipesProps } from "../../Types";
 import { postFavourites } from "../Favourites/postFavourites";
 import firebase from "firebase";
+import FavouritesButton from "../Favourites/FavouritesButton";
 
 export default function ShowRecipes({
   tagsChosen,
@@ -12,6 +13,7 @@ export default function ShowRecipes({
   recipeSearch
 }: ShowRecipesProps): JSX.Element {
   const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
+  const user = firebase.auth().currentUser
 
   useEffect(() => {
     const getRecipes = async () => {
@@ -66,18 +68,13 @@ export default function ShowRecipes({
                 <Flex>
                   <Heading fontSize="sm">{recipe.name}</Heading>
                   <Flex m="1vw">
+                    <FavouritesButton recipeId={recipe.id} 
+                    // postFavourites={postFavourites} 
+                    /> 
                     <IconButton
-                      aria-label="Add to favourites"
-                      backgroundColor="mediumorchid" 
-                      icon={<RiHeart2Line />}
-                      size="sm"
-                      mr="1vw"
-                      onClick={() => postFavourites(recipe.id, firebase.auth().currentUser?.uid || "")}// NEED TO CHANGE THIS 
-                    />
-                    <IconButton
-                      aria-label="Add to mealplan" 
+                      aria-label="Add to mealplan"   
                       backgroundColor="teal"
-                      icon={<GiMeal color="#66CCB5" />}
+                      icon={<GiMeal color="#66CCB5" />} 
                       size="sm"
                     />
                   </Flex>

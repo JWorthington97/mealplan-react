@@ -1,6 +1,12 @@
-export const postFavourites = async (recipeID: number, userID: string) => {
-    if (userID === "") {
-      window.alert("Error")
+interface PostFavouritesProps {
+  recipeID: number,
+  userID: string,
+  setPostFavouriteStatus(postFavouriteStatus: number): void
+}
+
+export const postFavourites = async ({recipeID, userID, setPostFavouriteStatus}: PostFavouritesProps) => {
+    if (userID === "") { 
+      window.alert("Not signed in postFavourites.tsx")
       return
     }
     const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/favourites`, {
@@ -10,11 +16,14 @@ export const postFavourites = async (recipeID: number, userID: string) => {
         },
         body: JSON.stringify({recipeID, userID})
       })
+
+    const body = await response.json()
   
     if (response.status === 201) {
         window.alert("Favourite added!")
     }
     else {
-      window.alert("Already in your favourites!")
+      // window.alert("Already in your favourites!")
+      window.alert(body.message)
     } 
 }
