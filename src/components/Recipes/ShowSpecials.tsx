@@ -1,8 +1,8 @@
 import { Grid, Box, Flex, Heading, IconButton, Image } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { GiMeal } from "react-icons/gi";
-import { RiHeart2Line } from "react-icons/ri";
 import { IRecipe } from "../../Types";
+import FavouritesButton from "../Favourites/FavouritesButton";
 import { RecipeTag } from "../Misc/RecipeTag";
 
 export default function ShowSpecials(): JSX.Element {
@@ -34,13 +34,7 @@ export default function ShowSpecials(): JSX.Element {
             <Flex>
               <Heading fontSize={["sm", "xl", "xl", "3xl", "xl"]}>{recipe.name}</Heading>
               <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}>
-                <IconButton
-                  aria-label="Add to favourites"
-                  backgroundColor="mediumorchid"
-                  icon={<RiHeart2Line />}
-                  size="sm"
-                  mr={["1vw", "1vw", "1vw", "1vw", "2%" ]}
-                />
+              <FavouritesButton recipeId={recipe.id}/> 
                 <IconButton
                   aria-label="Add to mealplan"
                   backgroundColor="teal"

@@ -1,4 +1,4 @@
-import { Flex, Input, Spacer, Heading, Grid, Select } from "@chakra-ui/react";
+import { Flex, Input, Spacer, Heading, Grid, Select, Divider } from "@chakra-ui/react";
 
 import ShowRecipes from "./ShowRecipes";
 import ShowSpecials from "./ShowSpecials";
@@ -33,16 +33,15 @@ export default function RecipeHome(): JSX.Element {
     <>
       
       <ShowSpecials />
-      <Heading textAlign="left" ml="2vw"> 
+      <Divider orientation="horizontal" />
+      <Heading textAlign="left" ml={["2vw", "2vw", "2vw", "1vw", 0]}> 
         Recipes
       </Heading>
-      <Flex mx="2vw">
-        <Input placeholder="Search recipes..." size="xs" w="50vw" onChange={(e) => setRecipeSearch(e.target.value)}></Input>
+      <Flex mx={["2vw", "2vw", "2vw", "1vw", 0]}>
+        <Input placeholder="Search recipes..." w="50vw" onChange={(e) => setRecipeSearch(e.target.value)}></Input>
         <Spacer />
-        {/* Need to fetch cuisines */}
         <Select
           placeholder="All cuisines"
-          size="xs"
           w="40vw"
           onChange={(e) => setCuisineChosen(e.target.value)}
         >
