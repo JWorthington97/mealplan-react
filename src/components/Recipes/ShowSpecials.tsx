@@ -31,6 +31,7 @@ export default function ShowSpecials(): JSX.Element {
               boxShadow="lg"
               objectFit="cover"
               borderTopRadius="10"
+              cursor="pointer"
               onClick={() => window.open(recipe.url)} 
             ></Image>
             <Flex>

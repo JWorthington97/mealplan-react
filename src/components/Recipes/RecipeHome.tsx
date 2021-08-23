@@ -38,11 +38,12 @@ export default function RecipeHome(): JSX.Element {
         Recipes
       </Heading>
       <Flex mx={["2vw", "2vw", "2vw", "1vw", 0]}>
-        <Input placeholder="Search recipes..." w="50vw" onChange={(e) => setRecipeSearch(e.target.value)}></Input>
+        <Input placeholder="Search recipes..." w={["50vw", "50vw", "50vw", "50vw", "50%"]} variant="flushed" onChange={(e) => setRecipeSearch(e.target.value)}></Input>
         <Spacer />
         <Select
           placeholder="All cuisines"
-          w="40vw"
+          w={["40vw", "40vw", "30vw", "30vw", "30%"]}
+          variant="flushed"
           onChange={(e) => setCuisineChosen(e.target.value)}
         >
           {cuisines.map((cuisine) => {
@@ -63,6 +64,7 @@ export default function RecipeHome(): JSX.Element {
               key={tag}
               tagVariant={tag}
               isSelected={tagsChosen[tag]}
+              cursor="pointer"
               onClick={() =>
                 setTagsChosen({
                   ...tagsChosen,

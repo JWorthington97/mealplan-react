@@ -67,7 +67,7 @@ function App() {
             </Route>
             <Route path="/">
               <Heading textAlign="center">
-                Weekly Recommendations
+                Weekly Picks
               </Heading> 
               <RecipeHome />
             </Route>
