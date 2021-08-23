@@ -1,4 +1,4 @@
-import { Flex, Input, Spacer, Heading, Grid, Select, Divider } from "@chakra-ui/react";
+import { Flex, Input, Spacer, Heading, Grid, Select, Divider, HStack } from "@chakra-ui/react";
 
 import ShowRecipes from "./ShowRecipes";
 import ShowSpecials from "./ShowSpecials";
@@ -52,10 +52,11 @@ export default function RecipeHome(): JSX.Element {
                   cuisine.cuisine.substring(1)}
               </option>
             );
-          })}
+          })} 
         </Select>
       </Flex>
-      <Grid my="2vw" overflowX="auto" gridAutoFlow="column">
+      <HStack mx={["2vw", "2vw", "2vw", "1vw", 0]}
+      my={["2vw", "2vw", "2vw", "2vw", "1em"]}>
         {Object.keys(tagsChosen).map((tag) => {
           return (
             <RecipeTag
@@ -71,7 +72,7 @@ export default function RecipeHome(): JSX.Element {
             /> 
           );
         })}
-      </Grid>
+      </HStack>
       <ShowRecipes tagsChosen={tagsChosen} cuisineChosen={cuisineChosen} recipeSearch={recipeSearch} />
     </>
   );
