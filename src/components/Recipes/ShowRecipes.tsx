@@ -34,7 +34,7 @@ export default function ShowRecipes({
 
 
   return (
-    <Grid templateColumns="repeat(2, 1fr)" gap={3}>
+    <Grid templateColumns={["repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(5, 1fr)"]} gap={3}>
       {recipes
         // Filtering on Cuisine
         .filter(
@@ -43,7 +43,7 @@ export default function ShowRecipes({
         )
         // Filtering on Tags
         .filter(
-          (recipe) =>
+          (recipe) => 
             recipe.tags.filter((tag) => trueTags.includes(tag)).length ===
               trueTags.length || trueTags.length === 0
         )
@@ -53,12 +53,12 @@ export default function ShowRecipes({
         .map((recipe) => {
           return (
             <Box key={recipe.id}>
-              <Box w={["45vw", "45vw", "45vw", "20vw"]} m="auto">
+              <Box w={["45vw", "45vw", "30vw", "30vw", "10vw"]} m="auto">
                 {/* div with background image set instead */}
                 <Image
                   src={recipe.image_url}
-                  boxSize={["45vw", "45vw", "45vw", "20vw"]}
-                  boxShadow="lg"
+                  boxSize={["45vw", "45vw", "30vw", "30vw", "10vw"]}
+                  boxShadow="lg" 
                   objectFit="cover"
                   borderTopRadius="10"
                   onClick={() => window.open(recipe.url)}
