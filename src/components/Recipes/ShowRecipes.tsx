@@ -2,7 +2,7 @@ import { Grid, Box, Flex, Heading, IconButton, Image } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { GiMeal } from "react-icons/gi";
 import { IRecipe, IRecipeFormatted, ShowRecipesProps } from "../../Types";
-import firebase from "firebase";
+// import firebase from "firebase";
 import FavouritesButton from "../Favourites/FavouritesButton";
 
 export default function ShowRecipes({
@@ -11,7 +11,7 @@ export default function ShowRecipes({
   recipeSearch
 }: ShowRecipesProps): JSX.Element {
   const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
-  const user = firebase.auth().currentUser
+  // const user = firebase.auth().currentUser
 
   useEffect(() => {
     const getRecipes = async () => {
@@ -34,7 +34,7 @@ export default function ShowRecipes({
 
 
   return (
-    <Grid templateColumns={["repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(5, 1fr)"]} gap={3}>
+    <Grid templateColumns={["repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(5, 1fr)"]} m={["2vw", "2vw", "2vw", "1vw", "1" ]} gap={3}>
       {recipes
         // Filtering on Cuisine
         .filter(

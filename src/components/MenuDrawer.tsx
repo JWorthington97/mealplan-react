@@ -1,10 +1,7 @@
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link as RouterLink } from "react-router-dom";
 import { useRef } from "react";
-import { Button } from '@chakra-ui/react'
-// import { FirebaseAuthContext } from "../Firebase/context";
 import firebase from "firebase";
-import SignInScreen from "../Firebase/SignIn";
 import SignOut from "../Firebase/SignOut";
 
 import {
