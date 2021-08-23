@@ -66,7 +66,7 @@ function App() {
               </Box>
             </Route>
             <Route path="/">
-              <Heading size="lg" textAlign="center">
+              <Heading textAlign="center">
                 Weekly Recommendations
               </Heading> 
               <RecipeHome />

@@ -27,7 +27,7 @@ export default function MenuDrawer(): JSX.Element {
   const hamburgerRef = useRef(null);
 
   const HamburgerLink = forwardRef<LinkProps, "div">((props, ref) => (
-    <Box m="3vw">
+    <Box m={["3vw", "3vw", "1vw", "1vw", "1vw"]}>
       <Link as={RouterLink} onClick={onClose} variant="hamburger" {...props} />
     </Box>
   ));

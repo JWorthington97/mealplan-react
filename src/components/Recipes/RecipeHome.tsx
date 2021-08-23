@@ -1,4 +1,4 @@
-import { Flex, Input, Spacer, Heading, Grid, Select, Divider, HStack } from "@chakra-ui/react";
+import { Flex, Input, Spacer, Heading, Select, Divider, HStack } from "@chakra-ui/react";
 
 import ShowRecipes from "./ShowRecipes";
 import ShowSpecials from "./ShowSpecials";
