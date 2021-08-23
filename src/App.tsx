@@ -35,7 +35,7 @@ function App() {
    
 
   return (
-      <Box width="100%" maxWidth="900px" margin="auto">
+      <Box width="100%" maxWidth="1024px" margin="auto">
         <Router>
           <Box>
             <MenuBar />
@@ -66,9 +66,9 @@ function App() {
               </Box>
             </Route>
             <Route path="/">
-              <Heading size="md" textAlign="center" mt="1vw">
+              <Heading size="lg" textAlign="center" mt="1vw">
                 Weekly Recommendations
-              </Heading>
+              </Heading> 
               <RecipeHome />
             </Route>
           </Switch>
