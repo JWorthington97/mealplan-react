@@ -9,22 +9,22 @@ import {
   // Link
 } from "react-router-dom";
 import RecipeHome from "./components/Recipes/RecipeHome";
-import SignInScreen from "./Firebase/SignInScreen";
+import SignInScreen from "./Firebase/SignIn";
 
 import firebase from 'firebase';
 import "firebase/auth"
 import { firebaseConfig } from "./Firebase/config"; 
 import { useEffect, useState } from "react";
 
-export const firebaseApp = firebase.initializeApp(firebaseConfig); 
+export const firebaseApp = firebase.initializeApp(firebaseConfig);  
 
 
 function App() { 
   const [isLoading, setIsLoading] = useState(true)
-  const [user, setUser] = useState<firebase.User | null>(null);
+  // const [user, setUser] = useState<firebase.User | null>(null);
   
     useEffect(() => {
-      const unsubscribe = firebase.auth().onAuthStateChanged((user) => {setUser(user); setIsLoading(false)});
+      const unsubscribe = firebase.auth().onAuthStateChanged(() => {setIsLoading(false)});
       return unsubscribe;
     }, []);
 
@@ -32,7 +32,7 @@ function App() {
       return <Spinner left="50%" color="primary"/>
     } 
   
-    console.log(user?.uid)
+   
 
   return (
       <Box width="100%" maxWidth="900px" margin="auto">

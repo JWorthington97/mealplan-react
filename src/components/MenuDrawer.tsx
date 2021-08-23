@@ -4,7 +4,8 @@ import { useRef } from "react";
 import { Button } from '@chakra-ui/react'
 // import { FirebaseAuthContext } from "../Firebase/context";
 import firebase from "firebase";
-import SignInScreen from "../Firebase/SignInScreen";
+import SignInScreen from "../Firebase/SignIn";
+import SignOut from "../Firebase/SignOut";
 
 import {
   Drawer,
@@ -60,12 +61,15 @@ export default function MenuDrawer(): JSX.Element {
             <HamburgerLink to="/favourites">Favourites</HamburgerLink>
             <HamburgerLink to="/plan">Plan</HamburgerLink>
             <HamburgerLink to="/add">Add</HamburgerLink>
-            {user ? <Button onClick={() => firebase.auth().signOut()}>Sign out</Button> : <HamburgerLink to="/signin">Sign In</HamburgerLink> }
-            {/* <HamburgerLink to="/signin">Sign In</HamburgerLink> */}
+            {
+              user ? 
+                <SignOut onClose={onClose}/> : 
+                <HamburgerLink to="/signin">Sign In</HamburgerLink> 
+            }
             <Box mt="10vh" >{user?.displayName}</Box>
           </DrawerBody>
         </DrawerContent>
-      </Drawer>
+      </Drawer> 
     </>
   );
 }

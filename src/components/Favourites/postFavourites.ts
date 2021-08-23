@@ -1,10 +1,13 @@
+import { createStandaloneToast } from '@chakra-ui/react'
+
 interface PostFavouritesProps {
   recipeID: number,
-  userID: string,
-  setPostFavouriteStatus(postFavouriteStatus: number): void
+  userID: string
 }
 
-export const postFavourites = async ({recipeID, userID, setPostFavouriteStatus}: PostFavouritesProps) => {
+type toastStatus = "success" | "info" | "warning" | "error" | undefined
+
+export const postFavourites = async ({recipeID, userID}: PostFavouritesProps) => {
     if (userID === "") { 
       window.alert("Not signed in postFavourites.tsx")
       return
@@ -18,12 +21,24 @@ export const postFavourites = async ({recipeID, userID, setPostFavouriteStatus}:
       })
 
     const body = await response.json()
-  
-    if (response.status === 201) {
-        window.alert("Favourite added!")
+
+    let toastMessage:{title: string, status: toastStatus} = {
+      title: "Added to your favourites.",
+      status: "success"
     }
-    else {
-      // window.alert("Already in your favourites!")
-      window.alert(body.message)
-    } 
+
+    if (body.message.includes("duplicate")) {
+      toastMessage = {
+        title: "Already in your favourites!",
+        status: "info"
+      }
+    }
+
+    const toast = createStandaloneToast()
+    toast({
+      title: toastMessage.title, 
+      status: toastMessage.status,
+      duration: 3000,
+      isClosable: true,
+    })
 }

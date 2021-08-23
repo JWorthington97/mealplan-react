@@ -1,9 +1,7 @@
 import { Grid, Box, Flex, Heading, IconButton, Image } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { GiMeal } from "react-icons/gi";
-import { RiHeart2Line } from "react-icons/ri";
 import { IRecipe, IRecipeFormatted, ShowRecipesProps } from "../../Types";
-import { postFavourites } from "../Favourites/postFavourites";
 import firebase from "firebase";
 import FavouritesButton from "../Favourites/FavouritesButton";
 
@@ -55,11 +53,11 @@ export default function ShowRecipes({
         .map((recipe) => {
           return (
             <Box key={recipe.id}>
-              <Box w="45vw" m="auto">
+              <Box w={["45vw", "45vw", "45vw", "20vw"]} m="auto">
                 {/* div with background image set instead */}
                 <Image
                   src={recipe.image_url}
-                  boxSize="45vw"
+                  boxSize={["45vw", "45vw", "45vw", "20vw"]}
                   boxShadow="lg"
                   objectFit="cover"
                   borderTopRadius="10"
