@@ -7,7 +7,7 @@ interface SignOutProps {
 export default function SignOut({ onClose }: SignOutProps): JSX.Element {
     const toast = useToast()
     return <Button colorScheme="teal" 
-        mt="3vw"
+        mt={["3vw", "3vw", "1vw", "1vw", "1vw"]}
         onClick={() => {
         firebase.auth().signOut();
         toast({

@@ -1,4 +1,4 @@
-import { Flex, Input, Spacer, Heading, Grid, Select } from "@chakra-ui/react";
+import { Flex, Input, Spacer, Heading, Select, Divider, HStack } from "@chakra-ui/react";
 
 import ShowRecipes from "./ShowRecipes";
 import ShowSpecials from "./ShowSpecials";
@@ -33,17 +33,17 @@ export default function RecipeHome(): JSX.Element {
     <>
       
       <ShowSpecials />
-      <Heading textAlign="left" ml="2vw"> 
+      <Divider orientation="horizontal" />
+      <Heading textAlign="left" ml={["2vw", "2vw", "2vw", "1vw", 0]}> 
         Recipes
       </Heading>
-      <Flex mx="2vw">
-        <Input placeholder="Search recipes..." size="xs" w="50vw" onChange={(e) => setRecipeSearch(e.target.value)}></Input>
+      <Flex mx={["2vw", "2vw", "2vw", "1vw", 0]}>
+        <Input placeholder="Search recipes..." w={["50vw", "50vw", "50vw", "50vw", "50%"]} variant="flushed" onChange={(e) => setRecipeSearch(e.target.value)}></Input>
         <Spacer />
-        {/* Need to fetch cuisines */}
         <Select
           placeholder="All cuisines"
-          size="xs"
-          w="40vw"
+          w={["40vw", "40vw", "30vw", "30vw", "30%"]}
+          variant="flushed"
           onChange={(e) => setCuisineChosen(e.target.value)}
         >
           {cuisines.map((cuisine) => {
@@ -53,16 +53,18 @@ export default function RecipeHome(): JSX.Element {
                   cuisine.cuisine.substring(1)}
               </option>
             );
-          })}
+          })} 
         </Select>
       </Flex>
-      <Grid my="2vw" overflowX="auto" gridAutoFlow="column">
+      <HStack mx={["2vw", "2vw", "2vw", "1vw", 0]}
+      my={["2vw", "2vw", "2vw", "2vw", "1em"]}>
         {Object.keys(tagsChosen).map((tag) => {
           return (
             <RecipeTag
               key={tag}
               tagVariant={tag}
               isSelected={tagsChosen[tag]}
+              cursor="pointer"
               onClick={() =>
                 setTagsChosen({
                   ...tagsChosen,
@@ -72,7 +74,7 @@ export default function RecipeHome(): JSX.Element {
             /> 
           );
         })}
-      </Grid>
+      </HStack>
       <ShowRecipes tagsChosen={tagsChosen} cuisineChosen={cuisineChosen} recipeSearch={recipeSearch} />
     </>
   );

@@ -1,4 +1,4 @@
-import { Grid, Box, Flex, Heading, IconButton, Image } from "@chakra-ui/react";
+import { Box, Flex, Heading, IconButton, Image, SimpleGrid } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { GiMeal } from "react-icons/gi";
 import { IRecipe, IRecipeFormatted, ShowRecipesProps } from "../../Types";
@@ -34,7 +34,11 @@ export default function ShowRecipes({
 
 
   return (
-    <Grid templateColumns={["repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(5, 1fr)"]} m={["2vw", "2vw", "2vw", "1vw", "1" ]} gap={3}>
+    <SimpleGrid 
+    // templateColumns={["repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(5, 1fr)"]} 
+    minChildWidth={["45vw", "45vw", "30vw", "30vw", "10vw"]}
+    m={["2vw", "2vw", "2vw", "1vw", "1" ]}
+    >
       {recipes
         // Filtering on Cuisine
         .filter(
@@ -61,11 +65,12 @@ export default function ShowRecipes({
                   boxShadow="lg" 
                   objectFit="cover"
                   borderTopRadius="10"
+                  cursor="pointer"
                   onClick={() => window.open(recipe.url)}
                 ></Image>
                 <Flex>
-                  <Heading fontSize="sm">{recipe.name}</Heading>
-                  <Flex m="1vw">
+                  <Heading fontSize={["sm", "xl", "xl", "3xl", "xl"]}>{recipe.name}</Heading>
+                  <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}>
                     <FavouritesButton recipeId={recipe.id} 
                     // postFavourites={postFavourites} 
                     /> 
@@ -81,6 +86,6 @@ export default function ShowRecipes({
             </Box>
           );
         })}
-    </Grid>
+    </SimpleGrid>
   );
 }

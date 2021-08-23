@@ -13,7 +13,6 @@ export const RecipeTag = forwardRef<ExtendTagProps, "div">((props, ref) => {
   return ( 
     <Box>
       <Tag
-        cursor="pointer"
         fontWeight="bold"
         fontSize="xs" 
         variant={variants[selectedVariant].type}

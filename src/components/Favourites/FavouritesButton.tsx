@@ -16,7 +16,7 @@ export default function FavouritesButton({recipeId}: FavouritesButtonProps): JSX
         backgroundColor="mediumorchid"  
         icon={<RiHeart2Line />}
         size="sm" 
-        mr="1vw"
+        mr={["1vw", "1vw", "1vw", "1vw", "2%" ]}
         onClick={() => {user ? 
             postFavourites({
                 recipeID:recipeId, 
