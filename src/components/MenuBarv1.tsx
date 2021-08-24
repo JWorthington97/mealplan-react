@@ -1,5 +1,4 @@
 import {
-  Box,
   Heading,
   Flex,
   Icon,
@@ -7,19 +6,15 @@ import {
   Button,
   Text,
   useColorMode,
-  IconButton,
 } from "@chakra-ui/react";
 import { GiMeal } from "react-icons/gi";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 export default function MenuBarv1(): JSX.Element {
-  const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Flex mx="1vw">
+    <Flex>
       <Flex>
-        <Icon as={GiMeal} color="primary" h={50} w={50} />
         <Heading color="primary" margin="auto">
-          mealplan
+          Recipeasy
         </Heading>
       </Flex>
       <Spacer />
@@ -38,18 +33,8 @@ export default function MenuBarv1(): JSX.Element {
         </Heading>
       </Flex>
       <Spacer />
-      <Flex margin="auto">
-        <Text margin="auto">Welcome, @testuser!</Text>
-        <Button color="primary" variant="ghost">
-          Sign Out
-        </Button>
-        <IconButton
-          icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
-          aria-label="Color mode switcher"
-          variant="outline"
-          onClick={toggleColorMode}
-        ></IconButton>
-      </Flex>
+      <Spacer />
+        <Icon as={GiMeal} color="primary" h={55} w={55} cursor="pointer" />
     </Flex>
   );
 }
