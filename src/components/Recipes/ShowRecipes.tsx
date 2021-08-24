@@ -76,7 +76,7 @@ export default function ShowRecipes({
                 <Flex>
                   <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25} mt={2} mb={4}>{titleCase(recipe.name)}</Text>
                   <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}>
-                    <FavouritesButton recipe={recipe} 
+                    <FavouritesButton recipe={recipe} setRecipes={setRecipes} recipes={recipes}
                     /> 
                     <IconButton
                       aria-label="Add to mealplan"   

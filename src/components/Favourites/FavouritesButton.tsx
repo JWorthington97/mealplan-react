@@ -2,13 +2,17 @@ import { IconButton, useToast } from "@chakra-ui/react";
 import { RiHeart2Line } from "react-icons/ri";
 import firebase from "firebase";
 import { postFavourites } from '../Favourites/postFavourites'
-import { IRecipeFormatted } from "../../Types";
+import { IRecipe, IRecipeFormatted } from "../../Types";
 
 interface FavouritesButtonProps {
-    recipe: IRecipeFormatted
+    recipe: IRecipeFormatted,
+    setRecipes?(recipes: IRecipeFormatted[]): void | undefined,
+    setSpecials?(specials: IRecipe[]):void | undefined,
+    recipes?: IRecipeFormatted[] | undefined,
+    specials?: IRecipe[] | undefined
 }
 
-export default function FavouritesButton({recipe}: FavouritesButtonProps): JSX.Element {
+export default function FavouritesButton({recipe, setRecipes, setSpecials, recipes, specials}: FavouritesButtonProps): JSX.Element {
     const { id, infavourites } = recipe
     const user = firebase.auth().currentUser
     const toast = useToast()
@@ -28,7 +32,11 @@ export default function FavouritesButton({recipe}: FavouritesButtonProps): JSX.E
         onClick={() => {user ? 
             postFavourites({
                 recipeID: id, 
-                userID: firebase.auth().currentUser?.uid || ""// NEED TO CHANGE THIS, "" is bad
+                userID: firebase.auth().currentUser?.uid || "",// NEED TO CHANGE THIS, "" is bad
+                setRecipes,
+                setSpecials,
+                recipes,
+                specials
                 }) 
             : toast({
                 title: "Not signed in.",
