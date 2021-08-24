@@ -31,8 +31,6 @@ export default function ShowRecipes({
     getRecipes();
   }, [isLoaded]);
 
-  console.log(recipes)
-
   const trueTags = Object.keys(tagsChosen).filter(
     (chosenTag) => tagsChosen[chosenTag]
   );

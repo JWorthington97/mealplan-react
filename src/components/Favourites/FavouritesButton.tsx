@@ -17,11 +17,6 @@ export default function FavouritesButton({recipe, setRecipes, setSpecials, recip
     const user = firebase.auth().currentUser
     const toast = useToast()
 
-    if (recipe.id === 2) {
-        console.log(recipe)
-    }
-   
-
     return <IconButton
         aria-label="Add to favourites"
         // backgroundColor="mediumorchid"  
