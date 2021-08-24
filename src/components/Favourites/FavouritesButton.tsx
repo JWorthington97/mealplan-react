@@ -13,8 +13,9 @@ export default function FavouritesButton({recipeId}: FavouritesButtonProps): JSX
 
     return <IconButton
         aria-label="Add to favourites"
-        backgroundColor="mediumorchid"  
+        // backgroundColor="mediumorchid"  
         icon={<RiHeart2Line />}
+        color="red"
         size="sm" 
         mr={["1vw", "1vw", "1vw", "1vw", "2%" ]}
         onClick={() => {user ? 

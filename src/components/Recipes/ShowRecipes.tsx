@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, IconButton, Image, SimpleGrid } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, IconButton, Image, SimpleGrid } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { GiMeal } from "react-icons/gi";
 import { IRecipe, IRecipeFormatted, ShowRecipesProps } from "../../Types";
@@ -59,6 +59,7 @@ export default function ShowRecipes({
             <Box key={recipe.id}>
               <Box w={["45vw", "45vw", "30vw", "30vw", "10vw"]} m="auto">
                 {/* div with background image set instead */}
+                <div style={{backgroundImage:"url(https://cdn.dribbble.com/users/1012566/screenshots/4187820/topic-2.jpg)",  backgroundSize:"cover", backgroundPosition:"center"}}>
                 <Image
                   src={recipe.image_url}
                   boxSize={["45vw", "45vw", "30vw", "30vw", "10vw"]}
@@ -68,15 +69,16 @@ export default function ShowRecipes({
                   cursor="pointer"
                   onClick={() => window.open(recipe.url)}
                 ></Image>
+                </div>
                 <Flex>
-                  <Heading fontSize={["sm", "xl", "xl", "3xl", "xl"]}>{recipe.name}</Heading>
+                  <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25} mt={2} mb={4}>{recipe.name}</Text>
                   <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}>
                     <FavouritesButton recipeId={recipe.id} 
                     // postFavourites={postFavourites} 
                     /> 
                     <IconButton
                       aria-label="Add to mealplan"   
-                      backgroundColor="teal"
+                      // backgroundColor="teal"
                       icon={<GiMeal color="#66CCB5" />} 
                       size="sm"
                     />

@@ -1,4 +1,4 @@
-import { Grid, Box, Flex, Heading, IconButton, Image } from "@chakra-ui/react";
+import { Grid, Box, Flex, Text, IconButton, Image } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { GiMeal } from "react-icons/gi";
 import { IRecipe } from "../../Types";
@@ -35,12 +35,12 @@ export default function ShowSpecials(): JSX.Element {
               onClick={() => window.open(recipe.url)} 
             ></Image>
             <Flex>
-              <Heading fontSize={["sm", "xl", "xl", "3xl", "xl"]}>{recipe.name}</Heading>
+            <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25} mt={2} mb={1}>{recipe.name}</Text>
               <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}>
               <FavouritesButton recipeId={recipe.id}/> 
                 <IconButton
                   aria-label="Add to mealplan"
-                  backgroundColor="teal"
+                  // backgroundColor="teal"
                   icon={<GiMeal color="#66CCB5" />}
                   size="sm"
                 />
@@ -52,7 +52,7 @@ export default function ShowSpecials(): JSX.Element {
                 .sort()
                 .map((tag) => {
                   return (
-                    <RecipeTag tagVariant={tag} key={tag} isSelected={true} />
+                    <RecipeTag tagVariant={tag} key={tag} isSelected={true} mr={0.5} mb={0.5}/> 
                   );
                 })}
             </Flex>
