@@ -2,8 +2,9 @@ import { Box, Flex, Text, IconButton, Image, SimpleGrid } from "@chakra-ui/react
 import { useState, useEffect } from "react";
 import { GiMeal } from "react-icons/gi";
 import { IRecipe, IRecipeFormatted, ShowRecipesProps } from "../../Types";
-// import firebase from "firebase";
+import firebase from "firebase";
 import FavouritesButton from "../Favourites/FavouritesButton";
+import { titleCase } from "title-case";
 
 export default function ShowRecipes({
   tagsChosen,
@@ -16,7 +17,7 @@ export default function ShowRecipes({
   useEffect(() => {
     const getRecipes = async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/recipes`
+        `${process.env.REACT_APP_BACKEND_URL}/recipes/${firebase.auth().currentUser?.uid}` 
       );
       const body = await response.json();
       const formatted: IRecipeFormatted[] = body.map((recipe: IRecipe) => {
@@ -62,7 +63,7 @@ export default function ShowRecipes({
                 <div style={{backgroundImage:"url(https://cdn.dribbble.com/users/1012566/screenshots/4187820/topic-2.jpg)",  backgroundSize:"cover", backgroundPosition:"center"}}>
                 <Image
                   src={recipe.image_url}
-                  boxSize={["45vw", "45vw", "30vw", "30vw", "10vw"]}
+                  boxSize={["45vw", "45vw", "30vw", "30vw", "10vw"]} 
                   boxShadow="lg" 
                   objectFit="cover"
                   borderTopRadius="10"
@@ -71,9 +72,9 @@ export default function ShowRecipes({
                 ></Image>
                 </div>
                 <Flex>
-                  <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25} mt={2} mb={4}>{recipe.name}</Text>
+                  <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25} mt={2} mb={4}>{titleCase(recipe.name)}</Text>
                   <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}>
-                    <FavouritesButton recipeId={recipe.id} 
+                    <FavouritesButton recipe={recipe} 
                     // postFavourites={postFavourites} 
                     /> 
                     <IconButton

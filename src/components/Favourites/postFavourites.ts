@@ -8,24 +8,26 @@ interface PostFavouritesProps {
 type toastStatus = "success" | "info" | "warning" | "error" | undefined
 
 export const postFavourites = async ({recipeID, userID}: PostFavouritesProps) => {
-    if (userID === "") { 
-      window.alert("Not signed in postFavourites.tsx")
-      return
-    }
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/favourites`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({recipeID, userID})
-      })
-
-    const body = await response.json()
-
     let toastMessage:{title: string, status: toastStatus} = {
       title: "Added to your favourites.",
       status: "success"
     }
+    if (userID === "") { 
+      toastMessage = {
+        title: "Not signed in.",
+        status: "warning"
+      }
+    }
+    else {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/favourites`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({recipeID, userID})
+        })
+
+      const body = await response.json()    
 
     if (body.message.includes("duplicate")) {
       toastMessage = {
@@ -33,6 +35,7 @@ export const postFavourites = async ({recipeID, userID}: PostFavouritesProps) =>
         status: "info"
       }
     }
+  }
 
     const toast = createStandaloneToast()
     toast({

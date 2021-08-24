@@ -2,12 +2,14 @@ import { IconButton, useToast } from "@chakra-ui/react";
 import { RiHeart2Line } from "react-icons/ri";
 import firebase from "firebase";
 import { postFavourites } from '../Favourites/postFavourites'
+import { IRecipeFormatted } from "../../Types";
 
 interface FavouritesButtonProps {
-    recipeId: number
+    recipe: IRecipeFormatted
 }
 
-export default function FavouritesButton({recipeId}: FavouritesButtonProps): JSX.Element {
+export default function FavouritesButton({recipe}: FavouritesButtonProps): JSX.Element {
+    const { id, infavourites } = recipe
     const user = firebase.auth().currentUser
     const toast = useToast()
 
@@ -15,17 +17,17 @@ export default function FavouritesButton({recipeId}: FavouritesButtonProps): JSX
         aria-label="Add to favourites"
         // backgroundColor="mediumorchid"  
         icon={<RiHeart2Line />}
-        color="red"
+        color={infavourites ? "red" : "black"}
         size="sm" 
         mr={["1vw", "1vw", "1vw", "1vw", "2%" ]}
         onClick={() => {user ? 
             postFavourites({
-                recipeID:recipeId, 
+                recipeID: id, 
                 userID: firebase.auth().currentUser?.uid || ""// NEED TO CHANGE THIS, "" is bad
                 }) 
             : toast({
                 title: "Not signed in.",
-                status: "warning",
+                status: "warning", 
                 duration: 3000,
                 isClosable: true,
               })
