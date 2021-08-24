@@ -4,6 +4,7 @@ import { GiMeal } from "react-icons/gi";
 import { IRecipe, IRecipeFormatted, ShowRecipesProps } from "../../Types";
 // import firebase from "firebase";
 import FavouritesButton from "../Favourites/FavouritesButton";
+import { titleCase } from "title-case";
 
 export default function ShowRecipes({
   tagsChosen,
@@ -71,7 +72,7 @@ export default function ShowRecipes({
                 ></Image>
                 </div>
                 <Flex>
-                  <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25} mt={2} mb={4}>{recipe.name}</Text>
+                  <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25} mt={2} mb={4}>{titleCase(recipe.name)}</Text>
                   <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}>
                     <FavouritesButton recipeId={recipe.id} 
                     // postFavourites={postFavourites} 

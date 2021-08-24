@@ -16,6 +16,6 @@ export default function SignOut({ onClose }: SignOutProps): JSX.Element {
             duration: 3000,
             isClosable: true,
           });
-          onClose()
+        onClose()
     }}>Sign out</Button> 
 }

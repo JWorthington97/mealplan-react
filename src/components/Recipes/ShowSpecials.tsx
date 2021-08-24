@@ -4,6 +4,7 @@ import { GiMeal } from "react-icons/gi";
 import { IRecipe } from "../../Types";
 import FavouritesButton from "../Favourites/FavouritesButton";
 import { RecipeTag } from "../Misc/RecipeTag";
+import { titleCase } from "title-case";
 
 export default function ShowSpecials(): JSX.Element {
   const [specials, setSpecials] = useState<IRecipe[]>([]);
@@ -35,13 +36,13 @@ export default function ShowSpecials(): JSX.Element {
               onClick={() => window.open(recipe.url)} 
             ></Image>
             <Flex>
-            <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25} mt={2} mb={1}>{recipe.name}</Text>
+            <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25} mt={2} mb={1}>{titleCase(recipe.name)}</Text>
               <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}>
               <FavouritesButton recipeId={recipe.id}/> 
                 <IconButton
                   aria-label="Add to mealplan"
                   // backgroundColor="teal"
-                  icon={<GiMeal color="#66CCB5" />}
+                  icon={<GiMeal color="#66CCB5" />} 
                   size="sm"
                 />
               </Flex>
