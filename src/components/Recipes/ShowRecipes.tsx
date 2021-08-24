@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text, IconButton, Image, SimpleGrid } from "@chakra-ui/react";
+import { Box, Flex, Text, IconButton, Image, SimpleGrid } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { GiMeal } from "react-icons/gi";
 import { IRecipe, IRecipeFormatted, ShowRecipesProps } from "../../Types";
