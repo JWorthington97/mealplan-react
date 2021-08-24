@@ -1,7 +1,7 @@
 import "./App.css";
 // import MenuBarv1 from './components/MenuBarv1';
 import MenuBar from "./components/MenuBar";
-import { Box, Divider, Spinner } from "@chakra-ui/react";
+import { Box, Divider } from "@chakra-ui/react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,9 +14,11 @@ import SignInScreen from "./Firebase/SignIn";
 import firebase from 'firebase';
 import "firebase/auth"
 import { firebaseConfig } from "./Firebase/config"; 
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const firebaseApp = firebase.initializeApp(firebaseConfig);  
+
+export const IsLoadingContext = createContext(true)
 
 
 function App() { 
@@ -28,16 +30,18 @@ function App() {
       return unsubscribe;
     }, []);
 
-    if (isLoading) {
-      return <Spinner left="50%" color="primary"/>
-    } 
+    // if (!isLoading) {
+    //   // return <Spinner left="50%" color="primary"/>
+    // } 
   
    
 
   return (
+    <IsLoadingContext.Provider value={isLoading}>
       <Box width="100%" maxWidth="1024px" margin="auto">
         <Router>
           <Box>
+            {/* {isLoading ? <Skeleton><MenuBar /></Skeleton> : <MenuBar />} */}
             <MenuBar />
             <Divider orientation="horizontal" /> 
           </Box>
@@ -66,11 +70,13 @@ function App() {
               </Box>
             </Route>
             <Route path="/">
+              {/* {isLoading ? <Skeleton><RecipeHome /></Skeleton> : <RecipeHome />} */}
               <RecipeHome />
             </Route>
           </Switch>
         </Router>
       </Box>
+      </IsLoadingContext.Provider>
   );
 }
 

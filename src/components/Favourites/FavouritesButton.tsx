@@ -13,6 +13,11 @@ export default function FavouritesButton({recipe}: FavouritesButtonProps): JSX.E
     const user = firebase.auth().currentUser
     const toast = useToast()
 
+    if (recipe.id === 2) {
+        console.log(recipe)
+    }
+   
+
     return <IconButton
         aria-label="Add to favourites"
         // backgroundColor="mediumorchid"  
