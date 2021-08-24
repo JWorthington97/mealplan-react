@@ -1,10 +1,11 @@
-import { Box, Flex, Text, IconButton, Image, SimpleGrid } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { Box, Flex, Text, IconButton, Image, SimpleGrid, Skeleton } from "@chakra-ui/react";
+import { useState, useEffect, useContext } from "react";
 import { GiMeal } from "react-icons/gi";
 import { IRecipe, IRecipeFormatted, ShowRecipesProps } from "../../Types";
 import firebase from "firebase";
 import FavouritesButton from "../Favourites/FavouritesButton";
 import { titleCase } from "title-case";
+import { IsLoadingContext } from "../../App";
 
 export default function ShowRecipes({
   tagsChosen,
@@ -12,7 +13,9 @@ export default function ShowRecipes({
   recipeSearch
 }: ShowRecipesProps): JSX.Element {
   const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
-  // const user = firebase.auth().currentUser
+
+  // pass set reicpes as prop and update locally to force a rerender for time being
+  let isLoaded = useContext(IsLoadingContext)
 
   useEffect(() => {
     const getRecipes = async () => {
@@ -26,17 +29,14 @@ export default function ShowRecipes({
       setRecipes(formatted);
     };
     getRecipes();
-  }, []);
+  }, [isLoaded]);
 
   const trueTags = Object.keys(tagsChosen).filter(
     (chosenTag) => tagsChosen[chosenTag]
   );
 
-
-
   return (
     <SimpleGrid 
-    // templateColumns={["repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(5, 1fr)"]} 
     minChildWidth={["45vw", "45vw", "30vw", "30vw", "10vw"]}
     m={["2vw", "2vw", "2vw", "1vw", "1" ]}
     >
@@ -57,9 +57,9 @@ export default function ShowRecipes({
         // Mapping over fully filtered recipes
         .map((recipe) => {
           return (
+            <Skeleton isLoaded={!isLoaded}>
             <Box key={recipe.id}>
               <Box w={["45vw", "45vw", "30vw", "30vw", "10vw"]} m="auto">
-                {/* div with background image set instead */}
                 <div style={{backgroundImage:"url(https://cdn.dribbble.com/users/1012566/screenshots/4187820/topic-2.jpg)",  backgroundSize:"cover", backgroundPosition:"center"}}>
                 <Image
                   src={recipe.image_url}
@@ -74,8 +74,7 @@ export default function ShowRecipes({
                 <Flex>
                   <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25} mt={2} mb={4}>{titleCase(recipe.name)}</Text>
                   <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}>
-                    <FavouritesButton recipe={recipe} 
-                    // postFavourites={postFavourites} 
+                    <FavouritesButton recipe={recipe} setRecipes={setRecipes} recipes={recipes}
                     /> 
                     <IconButton
                       aria-label="Add to mealplan"   
@@ -84,9 +83,10 @@ export default function ShowRecipes({
                       size="sm"
                     />
                   </Flex>
-                </Flex>
+                </Flex> 
               </Box>
             </Box>
+            </Skeleton>
           );
         })}
     </SimpleGrid>

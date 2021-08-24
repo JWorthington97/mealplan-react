@@ -10,7 +10,7 @@ export default function MenuBar(): JSX.Element {
       <Flex>
         <Icon as={GiMeal} color="primary" h={55} w={55} ml="1vw" />
         <Heading color="primary" margin="auto">
-          mealplan
+          recipeasy
         </Heading>
       </Flex>
       <Spacer />
