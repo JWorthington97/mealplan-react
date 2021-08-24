@@ -1,7 +1,7 @@
 import "./App.css";
 // import MenuBarv1 from './components/MenuBarv1';
 import MenuBar from "./components/MenuBar";
-import { Box, Divider, Heading, Spinner } from "@chakra-ui/react";
+import { Box, Divider, Spinner } from "@chakra-ui/react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -66,9 +66,6 @@ function App() {
               </Box>
             </Route>
             <Route path="/">
-              <Heading textAlign="center">
-                Weekly Picks
-              </Heading> 
               <RecipeHome />
             </Route>
           </Switch>

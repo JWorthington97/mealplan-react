@@ -31,10 +31,12 @@ export default function RecipeHome(): JSX.Element {
    
   return (
     <>
-      
+      <Heading textAlign="center" mt="2" mb="1">
+        Weekly Picks
+      </Heading> 
       <ShowSpecials />
       <Divider orientation="horizontal" />
-      <Heading textAlign="left" ml={["2vw", "2vw", "2vw", "1vw", 0]}> 
+      <Heading textAlign="left" ml={["2vw", "2vw", "2vw", "1vw", 0]} mt="2" mb="1"> 
         Recipes
       </Heading>
       <Flex mx={["2vw", "2vw", "2vw", "1vw", 0]}>
