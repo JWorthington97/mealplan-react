@@ -11,6 +11,16 @@ import { IsLoadingContext } from "../../App";
 export default function ShowSpecials(): JSX.Element {
   const [specials, setSpecials] = useState<IRecipe[]>([]);
   const isLoaded = useContext(IsLoadingContext)
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  firebase.auth().onAuthStateChanged((user => {
+    if(user) {
+      setLoggedIn(true)
+    }
+    else {
+      setLoggedIn(false)
+    }
+  }))
 
   useEffect(() => {
     const getSpecials = async () => {
@@ -21,7 +31,7 @@ export default function ShowSpecials(): JSX.Element {
       setSpecials(body);
     };
     getSpecials();
-  }, [isLoaded]);
+  }, [isLoaded, loggedIn]);
 
   return (
     <Skeleton isLoaded={!isLoaded}>
