@@ -5,33 +5,23 @@ import { IRecipe } from "../../Types";
 import FavouritesButton from "../Favourites/FavouritesButton";
 import { RecipeTag } from "../Misc/RecipeTag";
 import { titleCase } from "title-case";
-import firebase from "firebase";
-import { IsLoadingContext } from "../../App";
+import { IsLoadingContext, UserContext } from "../../App";
 
 export default function ShowSpecials(): JSX.Element {
   const [specials, setSpecials] = useState<IRecipe[]>([]);
   const isLoaded = useContext(IsLoadingContext)
-  const [loggedIn, setLoggedIn] = useState(false)
-
-  firebase.auth().onAuthStateChanged((user => {
-    if(user) {
-      setLoggedIn(true)
-    }
-    else {
-      setLoggedIn(false)
-    }
-  }))
+  const user = useContext(UserContext)
 
   useEffect(() => {
     const getSpecials = async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/specials/${firebase.auth().currentUser?.uid}`
+        `${process.env.REACT_APP_BACKEND_URL}/specials/${user?.uid}`
       );
       const body = await response.json();
       setSpecials(body);
     };
     getSpecials();
-  }, [isLoaded, loggedIn]);
+  }, [isLoaded, user]);
 
   return (
     <Skeleton isLoaded={!isLoaded}>

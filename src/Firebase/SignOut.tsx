@@ -1,9 +1,9 @@
 import { Button, useToast } from "@chakra-ui/react";
-import firebase from "firebase";
+import firebase from "firebase/app";
 
 interface SignOutProps {
     onClose?(): void,
-    
+
 }
 export default function SignOut({ onClose }: SignOutProps): JSX.Element {
     const toast = useToast()

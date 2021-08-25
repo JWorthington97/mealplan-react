@@ -1,47 +1,55 @@
-import "./App.css";
-import MenuBar from "./components/MenuBar";
 import { Box, Divider, Skeleton, useMediaQuery } from "@chakra-ui/react";
 import {
   BrowserRouter as Router,
   Switch,
   Route, 
-  // Link
 } from "react-router-dom";
 import RecipeHome from "./components/Recipes/RecipeHome";
 import SignInScreen from "./Firebase/SignIn";
+import firebase from 'firebase/app';
+import { firebaseConfig } from "./Firebase/config";  
+import { createContext, useState } from "react";
+import MenuBarMobile from "./components/MenuBarMobile";
+import MenuBarDesktop from "./components/MenuBarDesktop";
 
-import firebase from 'firebase';
-import "firebase/auth"
-import { firebaseConfig } from "./Firebase/config"; 
-import { createContext, useEffect, useState } from "react";
-import MenuBarv1 from "./components/MenuBarv1";
-
-export const firebaseApp = firebase.initializeApp(firebaseConfig);  
-
+//Contexts
+export const firebaseApp = firebase.initializeApp(firebaseConfig); 
 export const IsLoadingContext = createContext(true)
+export const UserContext = createContext<firebase.User | undefined>(undefined)
 
 
 function App() { 
   const [isLoading, setIsLoading] = useState(true)
+  const [user, setUser] = useState<firebase.User | undefined>(undefined)
   const [isDesktop] = useMediaQuery("(min-width: 1280px)")
-  // const [user, setUser] = useState<firebase.User | null>(null);
-  
-    useEffect(() => {
-      const unsubscribe = firebase.auth().onAuthStateChanged(() => {setIsLoading(false)});
-      return unsubscribe;
-    }, []);
+
+    // useEffect(() => {
+    //   const unsubscribe = firebase.auth().onAuthStateChanged(() => {setIsLoading(false)});
+    //   return unsubscribe;
+    // }, []);
+
+  firebase.auth().onAuthStateChanged((user) => {
+    setIsLoading(false)
+    if (user) {
+      setUser(user)
+    }
+    else {
+      setUser(undefined)
+    }
+  })
 
     // if (!isLoading) {
     //   // return <Spinner left="50%" color="primary"/>
     // } 
 
   return (
+    <UserContext.Provider value={user}>
     <IsLoadingContext.Provider value={isLoading}>
       <Box width="100%" maxWidth="1024px" margin="auto">
         <Router>
           <Skeleton isLoaded={!isLoading}>
           <Box>
-            {isDesktop === true ? <MenuBarv1 /> : <MenuBar />}
+            {isDesktop === true ? <MenuBarDesktop /> : <MenuBarMobile />}
             <Divider orientation="horizontal" /> 
           </Box>
           </Skeleton>
@@ -77,6 +85,7 @@ function App() {
         </Router>
       </Box>
       </IsLoadingContext.Provider>
+      </UserContext.Provider>
   );
 }
 

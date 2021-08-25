@@ -1,5 +1,4 @@
 import { Flex, Input, Spacer, Select, Divider, HStack, Text } from "@chakra-ui/react";
-
 import ShowRecipes from "./ShowRecipes";
 import ShowSpecials from "./ShowSpecials";
 import { RecipeTag } from "../Misc/RecipeTag";

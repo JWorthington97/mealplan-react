@@ -2,10 +2,9 @@ import { Box, Flex, Text, IconButton, Image, SimpleGrid, Skeleton } from "@chakr
 import { useState, useEffect, useContext } from "react";
 import { GiMeal } from "react-icons/gi";
 import { IRecipe, IRecipeFormatted, ShowRecipesProps } from "../../Types";
-import firebase from "firebase";
 import FavouritesButton from "../Favourites/FavouritesButton";
 import { titleCase } from "title-case";
-import { IsLoadingContext } from "../../App";
+import { IsLoadingContext, UserContext } from "../../App";
 
 export default function ShowRecipes({
   tagsChosen,
@@ -13,22 +12,13 @@ export default function ShowRecipes({
   recipeSearch
 }: ShowRecipesProps): JSX.Element {
   const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
-  let isLoaded = useContext(IsLoadingContext)
-  const [loggedIn, setLoggedIn] = useState(false)
-
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      setLoggedIn(true)
-    }
-    else {
-      setLoggedIn(false)
-    }
-  })
+  const isLoaded = useContext(IsLoadingContext)
+  const user = useContext(UserContext)
 
   useEffect(() => {
     const getRecipes = async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/recipes/${firebase.auth().currentUser?.uid}` 
+        `${process.env.REACT_APP_BACKEND_URL}/recipes/${user?.uid}` 
       );
       const body = await response.json();
       const formatted: IRecipeFormatted[] = body.map((recipe: IRecipe) => {
@@ -37,7 +27,7 @@ export default function ShowRecipes({
       setRecipes(formatted);
     };
     getRecipes();
-  }, [isLoaded, loggedIn]);
+  }, [isLoaded, user]);
 
   const trueTags = Object.keys(tagsChosen).filter(
     (chosenTag) => tagsChosen[chosenTag]
