@@ -26,10 +26,10 @@ export default function MenuBarDesktop(): JSX.Element {
       </Flex>
       <Spacer />
       <Flex margin="auto" textAlign="center">
-        <Link as={RouterLink} to="/" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Recipes</Link>
-        <Link as={RouterLink} to="/favourites" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Favourites</Link>
-        <Link as={RouterLink} to="/plan" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Plan</Link>
-        <Link as={RouterLink} to="/add" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Add</Link>
+        <Link as={RouterLink} to="/" color="primary" fontWeight="bold" fontSize="xl" mr="2vw">Recipes</Link>
+        <Link as={RouterLink} to="/favourites" color="primary" fontWeight="bold" fontSize="xl" mr="2vw">Favourites</Link>
+        <Link as={RouterLink} to="/plan" color="primary" fontWeight="bold" fontSize="xl" mr="2vw">Plan</Link>
+        <Link as={RouterLink} to="/add" color="primary" fontWeight="bold" fontSize="xl" mr="2vw">Add</Link>
       </Flex>
       <Spacer />
       {
