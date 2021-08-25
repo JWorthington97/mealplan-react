@@ -34,6 +34,8 @@ export default function ShowSpecials(): JSX.Element {
               
                 <Image
                   src={recipe.image_url}
+                  fallbackSrc={"https://cdn.dribbble.com/users/1012566/screenshots/4187820/topic-2.jpg"}
+                  alt={recipe.name}
                   boxSize={["45vw", "45vw", "30vw", "30vw", "10vw"]}
                   boxShadow="lg"
                   objectFit="cover"

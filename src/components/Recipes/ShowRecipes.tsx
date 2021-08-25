@@ -55,12 +55,13 @@ export default function ShowRecipes({
         // Mapping over fully filtered recipes
         .map((recipe) => {
           return (
-            <Skeleton isLoaded={!isLoaded}>
             <Box key={recipe.id}>
+              <Skeleton isLoaded={!isLoaded}>
               <Box w={["45vw", "45vw", "30vw", "30vw", "10vw"]} m="auto">
-                <div style={{backgroundImage:"url(https://cdn.dribbble.com/users/1012566/screenshots/4187820/topic-2.jpg)",  backgroundSize:"cover", backgroundPosition:"center"}}>
                 <Image
                   src={recipe.image_url}
+                  fallbackSrc={"https://cdn.dribbble.com/users/1012566/screenshots/4187820/topic-2.jpg"}
+                  alt={recipe.name}
                   boxSize={["45vw", "45vw", "30vw", "30vw", "10vw"]} 
                   boxShadow="lg" 
                   objectFit="cover"
@@ -68,7 +69,6 @@ export default function ShowRecipes({
                   cursor="pointer"
                   onClick={() => window.open(recipe.url)}
                 ></Image>
-                </div>
                 <Flex>
                   <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25} mt={2} mb={4}>{titleCase(recipe.name)}</Text>
                   <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}>
@@ -83,8 +83,8 @@ export default function ShowRecipes({
                   </Flex>
                 </Flex> 
               </Box>
+              </Skeleton>
             </Box>
-            </Skeleton>
           );
         })}
     </SimpleGrid>

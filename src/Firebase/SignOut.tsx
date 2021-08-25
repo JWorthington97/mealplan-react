@@ -14,6 +14,7 @@ export default function SignOut({ onClose }: SignOutProps): JSX.Element {
 
     return <Button colorScheme="teal" 
         m="auto"
+        size="sm"
         onClick={() => {
         // firebase.auth().signOut();
         tttsignOut();
