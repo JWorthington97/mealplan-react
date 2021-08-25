@@ -1,4 +1,4 @@
-import { Flex, Heading, Icon, IconButton, Spacer } from "@chakra-ui/react";
+import { Flex, Heading, Icon, Spacer } from "@chakra-ui/react";
 import { GiMeal } from "react-icons/gi";
 import MenuDrawer from "./MenuDrawer";
 

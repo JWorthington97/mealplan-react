@@ -3,11 +3,10 @@ import {
   Flex,
   Icon,
   Spacer,
-  Button,
-  Text,
-  useColorMode,
+  Link
 } from "@chakra-ui/react";
 import { GiMeal } from "react-icons/gi";
+import { Link as RouterLink } from 'react-router-dom'
 
 export default function MenuBarv1(): JSX.Element {
   return (
@@ -19,18 +18,22 @@ export default function MenuBarv1(): JSX.Element {
       </Flex>
       <Spacer />
       <Flex margin="auto" textAlign="center">
-        <Heading variant="topBar" size="md">
+        <Link as={RouterLink} to="/" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Recipes</Link>
+        <Link as={RouterLink} to="/favourites" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Favourites</Link>
+        <Link as={RouterLink} to="/plan" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Plan</Link>
+        <Link as={RouterLink} to="/add" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Recipes</Link>
+        {/* <Heading variant="topBar" size="md">
           Recipes
         </Heading>
         <Heading variant="topBar" size="md">
           Favourites
-        </Heading>
+        </Heading> 
         <Heading variant="topBar" size="md">
           Plan
         </Heading>
         <Heading variant="topBar" size="md">
           Add
-        </Heading>
+        </Heading> */}
       </Flex>
       <Spacer />
       <Spacer />
