@@ -21,7 +21,7 @@ export default function MenuBarv1(): JSX.Element {
     else {
       setLoggedIn(false)
     }})
-    
+
   return (
     <Flex>
       <Flex>
@@ -34,7 +34,7 @@ export default function MenuBarv1(): JSX.Element {
         <Link as={RouterLink} to="/" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Recipes</Link>
         <Link as={RouterLink} to="/favourites" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Favourites</Link>
         <Link as={RouterLink} to="/plan" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Plan</Link>
-        <Link as={RouterLink} to="/add" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Recipes</Link>
+        <Link as={RouterLink} to="/add" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Add</Link>
         {/* <Heading variant="topBar" size="md">
           Recipes
         </Heading>
