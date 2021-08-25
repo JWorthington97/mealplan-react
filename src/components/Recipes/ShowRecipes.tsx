@@ -13,9 +13,17 @@ export default function ShowRecipes({
   recipeSearch
 }: ShowRecipesProps): JSX.Element {
   const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
-
-  // pass set reicpes as prop and update locally to force a rerender for time being
   let isLoaded = useContext(IsLoadingContext)
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      setLoggedIn(true)
+    }
+    else {
+      setLoggedIn(false)
+    }
+  })
 
   useEffect(() => {
     const getRecipes = async () => {
@@ -29,7 +37,7 @@ export default function ShowRecipes({
       setRecipes(formatted);
     };
     getRecipes();
-  }, [isLoaded]);
+  }, [isLoaded, loggedIn]);
 
   const trueTags = Object.keys(tagsChosen).filter(
     (chosenTag) => tagsChosen[chosenTag]

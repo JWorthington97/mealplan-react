@@ -1,6 +1,6 @@
 import "./App.css";
 import MenuBar from "./components/MenuBar";
-import { Box, Divider, useMediaQuery } from "@chakra-ui/react";
+import { Box, Divider, Skeleton, useMediaQuery } from "@chakra-ui/react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -34,17 +34,17 @@ function App() {
     // if (!isLoading) {
     //   // return <Spinner left="50%" color="primary"/>
     // } 
-  
-   
 
   return (
     <IsLoadingContext.Provider value={isLoading}>
       <Box width="100%" maxWidth="1024px" margin="auto">
         <Router>
+          <Skeleton isLoaded={!isLoading}>
           <Box>
             {isDesktop === true ? <MenuBarv1 /> : <MenuBar />}
             <Divider orientation="horizontal" /> 
           </Box>
+          </Skeleton>
           <Switch>
           <Route path="/signin">
               <SignInScreen />

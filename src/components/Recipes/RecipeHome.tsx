@@ -17,7 +17,7 @@ export default function RecipeHome(): JSX.Element {
     vegan: false,
     leftovers: false,
   });
-  
+ 
   useEffect(() => {
     const getCuisines = async () => {
       const response = await fetch(
