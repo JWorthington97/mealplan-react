@@ -1,4 +1,4 @@
-import { Flex, Input, Spacer, Heading, Select, Divider, HStack } from "@chakra-ui/react";
+import { Flex, Input, Spacer, Select, Divider, HStack, Text } from "@chakra-ui/react";
 
 import ShowRecipes from "./ShowRecipes";
 import ShowSpecials from "./ShowSpecials";
@@ -31,14 +31,14 @@ export default function RecipeHome(): JSX.Element {
    
   return (
     <>
-      <Heading ml={["2vw", "2vw", "2vw", "1vw", 0]} mt={["2", "2", "2", "2", "32px"]} mb="1">
+      <Text ml={["2vw", "2vw", "2vw", "1vw", 0]} mt={["2", "2", "2", "2", "32px"]} mb="1" fontSize={["2xl", "3xl"]} fontWeight="bold">
         Weekly Picks
-      </Heading> 
+      </Text>
       <ShowSpecials />
       <Divider orientation="horizontal" />
-      <Heading  ml={["2vw", "2vw", "2vw", "1vw", 0]} mt={["2", "2", "2", "2", "32px"]} mb="1"> 
+      <Text  ml={["2vw", "2vw", "2vw", "1vw", 0]} mt={["2", "2", "2", "2", "32px"]} mb="1" fontSize={["2xl", "3xl"]} fontWeight="bold">  
         Recipes
-      </Heading>
+      </Text>
       <Flex mx={["2vw", "2vw", "2vw", "1vw", 0]}>
         <Input placeholder="Search recipes..." w={["50vw", "50vw", "50vw", "50vw", "50%"]} variant="flushed" onChange={(e) => setRecipeSearch(e.target.value)}></Input>
         <Spacer />

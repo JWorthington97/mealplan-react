@@ -1,55 +1,43 @@
 import {
-  Box,
   Heading,
   Flex,
   Icon,
   Spacer,
-  Button,
-  Text,
-  useColorMode,
-  IconButton,
+  Link
 } from "@chakra-ui/react";
 import { GiMeal } from "react-icons/gi";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { Link as RouterLink } from 'react-router-dom'
 
 export default function MenuBarv1(): JSX.Element {
-  const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Flex mx="1vw">
+    <Flex>
       <Flex>
-        <Icon as={GiMeal} color="primary" h={50} w={50} />
         <Heading color="primary" margin="auto">
-          mealplan
+          Recipeasy
         </Heading>
       </Flex>
       <Spacer />
       <Flex margin="auto" textAlign="center">
-        <Heading variant="topBar" size="md">
+        <Link as={RouterLink} to="/" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Recipes</Link>
+        <Link as={RouterLink} to="/favourites" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Favourites</Link>
+        <Link as={RouterLink} to="/plan" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Plan</Link>
+        <Link as={RouterLink} to="/add" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Recipes</Link>
+        {/* <Heading variant="topBar" size="md">
           Recipes
         </Heading>
         <Heading variant="topBar" size="md">
           Favourites
-        </Heading>
+        </Heading> 
         <Heading variant="topBar" size="md">
           Plan
         </Heading>
         <Heading variant="topBar" size="md">
           Add
-        </Heading>
+        </Heading> */}
       </Flex>
       <Spacer />
-      <Flex margin="auto">
-        <Text margin="auto">Welcome, @testuser!</Text>
-        <Button color="primary" variant="ghost">
-          Sign Out
-        </Button>
-        <IconButton
-          icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
-          aria-label="Color mode switcher"
-          variant="outline"
-          onClick={toggleColorMode}
-        ></IconButton>
-      </Flex>
+      <Spacer />
+        <Icon as={GiMeal} color="primary" h={55} w={55} cursor="pointer" />
     </Flex>
   );
 }

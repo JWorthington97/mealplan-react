@@ -1,7 +1,6 @@
 import "./App.css";
-// import MenuBarv1 from './components/MenuBarv1';
 import MenuBar from "./components/MenuBar";
-import { Box, Divider } from "@chakra-ui/react";
+import { Box, Divider, useMediaQuery } from "@chakra-ui/react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,6 +14,7 @@ import firebase from 'firebase';
 import "firebase/auth"
 import { firebaseConfig } from "./Firebase/config"; 
 import { createContext, useEffect, useState } from "react";
+import MenuBarv1 from "./components/MenuBarv1";
 
 export const firebaseApp = firebase.initializeApp(firebaseConfig);  
 
@@ -23,6 +23,7 @@ export const IsLoadingContext = createContext(true)
 
 function App() { 
   const [isLoading, setIsLoading] = useState(true)
+  const [isDesktop] = useMediaQuery("(min-width: 1280px)")
   // const [user, setUser] = useState<firebase.User | null>(null);
   
     useEffect(() => {
@@ -41,8 +42,7 @@ function App() {
       <Box width="100%" maxWidth="1024px" margin="auto">
         <Router>
           <Box>
-            {/* {isLoading ? <Skeleton><MenuBar /></Skeleton> : <MenuBar />} */}
-            <MenuBar />
+            {isDesktop === true ? <MenuBarv1 /> : <MenuBar />}
             <Divider orientation="horizontal" /> 
           </Box>
           <Switch>
