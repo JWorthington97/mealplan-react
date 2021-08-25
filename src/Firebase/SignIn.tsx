@@ -1,6 +1,7 @@
 // import firebase from "firebase/app";
 import { StyledFirebaseAuth } from "react-firebaseui";
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth'
 import { Box, Heading } from "@chakra-ui/react";
 
 const uiConfig = {
@@ -9,7 +10,7 @@ const uiConfig = {
     // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
     signInSuccessUrl: '/',
     signInOptions: [
-      firebase.auth.EmailAuthProvider.PROVIDER_ID
+      firebase.auth.EmailAuthProvider.PROVIDER_ID 
     ],
   };
 

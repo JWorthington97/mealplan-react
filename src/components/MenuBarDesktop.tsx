@@ -7,20 +7,15 @@ import {
 } from "@chakra-ui/react";
 import { GiMeal } from "react-icons/gi";
 import { Link as RouterLink } from 'react-router-dom'
-import firebase from "firebase";
 import SignOut from "../Firebase/SignOut";
-import { useState } from "react";
+import { useEffect, useContext } from "react";
+import { UserContext } from "../App";
 
-export default function MenuBarv1(): JSX.Element {
-  const [loggedIn, setLoggedIn] = useState(false)
+export default function MenuBarDesktop(): JSX.Element {
+  const user = useContext(UserContext)
 
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-     setLoggedIn(true) 
-    }
-    else {
-      setLoggedIn(false)
-    }})
+  useEffect(() => {
+  }, [user])
 
   return (
     <Flex>
@@ -35,27 +30,13 @@ export default function MenuBarv1(): JSX.Element {
         <Link as={RouterLink} to="/favourites" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Favourites</Link>
         <Link as={RouterLink} to="/plan" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Plan</Link>
         <Link as={RouterLink} to="/add" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Add</Link>
-        {/* <Heading variant="topBar" size="md">
-          Recipes
-        </Heading>
-        <Heading variant="topBar" size="md">
-          Favourites
-        </Heading> 
-        <Heading variant="topBar" size="md">
-          Plan
-        </Heading>
-        <Heading variant="topBar" size="md"> 
-          Add
-        </Heading> */}
       </Flex>
       <Spacer />
-      <Spacer />
       {
-              loggedIn ? 
-                <SignOut /> : 
-                <Link as={RouterLink} to="/signin" color="primary" fontWeight="bold" fontSize="xl" mx="1vw" my="auto">Sign In</Link>
-            }
-            
+        user ? 
+          <SignOut /> : 
+          <Link as={RouterLink} to="/signin" color="primary" fontWeight="bold" fontSize="xl" mx="1vw" my="auto">Sign In</Link>
+      }    
         <Icon as={GiMeal} color="primary" h={55} w={55} cursor="pointer" />
     </Flex>
   );

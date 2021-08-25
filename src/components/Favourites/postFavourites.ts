@@ -17,6 +17,7 @@ export const postFavourites = async ({recipeID, userID, setRecipes, setSpecials,
       title: "Added to your favourites.",
       status: "success"
     }
+
     if (userID === "") { 
       toastMessage = {
         title: "Not signed in.",
@@ -34,23 +35,31 @@ export const postFavourites = async ({recipeID, userID, setRecipes, setSpecials,
 
       const body = await response.json()    
 
-    if (body.message.includes("duplicate")) {
-      toastMessage = {
-        title: "Already in your favourites!",
-        status: "info"
+      if (body.message.includes("duplicate")) {
+        toastMessage = {
+          title: "Already in your favourites!",
+          status: "info"
+        }
+      }
+      else {
+        if (recipes && setRecipes) {
+          const newRecipes = recipes
+          .map((recipe) => recipe.id === recipeID ?
+            ({...recipe, infavourites : recipe.infavourites ? false : true}) :
+            {...recipe}
+            )
+          setRecipes(newRecipes)
+        }
+        else if (specials && setSpecials) {
+          const newSpecials = specials
+          .map((specials) => specials.id === recipeID ?
+            ({...specials, infavourites : specials.infavourites ? false : true}) 
+            : {...specials}
+            )
+          setSpecials(newSpecials)
+        }
       }
     }
-    else {
-      if (recipes && setRecipes) {
-        const newRecipes = recipes.map((recipe) => recipe.id === recipeID ? ({...recipe, infavourites : recipe.infavourites ? false : true}) : {...recipe})
-        setRecipes(newRecipes)
-      }
-      else if (specials && setSpecials) {
-        const newSpecials = specials.map((specials) => specials.id === recipeID ? ({...specials, infavourites : specials.infavourites ? false : true}) : {...specials})
-        setSpecials(newSpecials)
-      }
-    }
-  }
 
     const toast = createStandaloneToast()
     toast({
