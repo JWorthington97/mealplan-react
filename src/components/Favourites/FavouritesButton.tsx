@@ -42,4 +42,3 @@ export default function FavouritesButton({recipe, setRecipes, setSpecials, recip
         }} 
     />
 }
-

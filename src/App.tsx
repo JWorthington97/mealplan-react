@@ -8,25 +8,57 @@ import RecipeHome from "./components/Recipes/RecipeHome";
 import SignInScreen from "./Firebase/SignIn";
 import firebase from 'firebase/app';
 import { firebaseConfig } from "./Firebase/config";  
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import MenuBarMobile from "./components/MenuBarMobile";
 import MenuBarDesktop from "./components/MenuBarDesktop";
+import FavouritesHome from "./components/Favourites/FavouritesHome";
+import { ICuisine, IRecipe, IRecipeFormatted } from "./Types";
 
 //Contexts
 export const firebaseApp = firebase.initializeApp(firebaseConfig); 
 export const IsLoadingContext = createContext(true)
-export const UserContext = createContext<firebase.User | undefined>(undefined)
+export const UserContext = createContext<firebase.User | undefined>(undefined) 
 
+type TRecipe = {
+  recipes: IRecipeFormatted[], 
+  setRecipes(recipes: IRecipeFormatted[]): void
+}
+export const RecipesContext = createContext<TRecipe>({recipes: [], setRecipes: () => console.log()})
+export const CuisinesContext = createContext<ICuisine[]>([])
 
 function App() { 
   const [isLoading, setIsLoading] = useState(true)
   const [user, setUser] = useState<firebase.User | undefined>(undefined)
   const [isDesktop] = useMediaQuery("(min-width: 1280px)")
+  const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
+  const [cuisines, setCuisines] = useState<ICuisine[]>([])
 
-    // useEffect(() => {
-    //   const unsubscribe = firebase.auth().onAuthStateChanged(() => {setIsLoading(false)});
-    //   return unsubscribe;
-    // }, []);
+  // Get Recipes. Potential to join specials flag onto this as well
+  useEffect(() => {
+    const getRecipes = async () => {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/recipes/${user?.uid}` 
+      );
+      const body = await response.json();
+      const formatted: IRecipeFormatted[] = body.map((recipe: IRecipe) => {
+        return { ...recipe, tags: recipe.tags.split(", ") };
+      });
+      setRecipes(formatted);
+    };
+    getRecipes();
+  }, [isLoading, user]); // is loading here mgiht need to be not here
+
+  // Get Cuisines
+  useEffect(() => {
+    const getCuisines = async () => {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/cuisines`
+      );
+      const body = await response.json();
+      setCuisines(body);
+    };
+    getCuisines();
+  }, []);
 
   firebase.auth().onAuthStateChanged((user) => {
     setIsLoading(false)
@@ -38,13 +70,11 @@ function App() {
     }
   })
 
-    // if (!isLoading) {
-    //   // return <Spinner left="50%" color="primary"/>
-    // } 
-
   return (
     <UserContext.Provider value={user}>
     <IsLoadingContext.Provider value={isLoading}>
+      <RecipesContext.Provider value={{recipes, setRecipes}}>
+        <CuisinesContext.Provider value={cuisines}>
       <Box width="100%" maxWidth="1024px" margin="auto">
         <Router>
           <Skeleton isLoaded={!isLoading}>
@@ -68,9 +98,7 @@ function App() {
               </Box>
             </Route>
             <Route path="/favourites">
-              <Box textAlign="center" m="auto">
-                Favourites
-              </Box>
+              <FavouritesHome /> 
             </Route>
             <Route path="/admin">
               <Box textAlign="center" m="auto">
@@ -84,6 +112,8 @@ function App() {
           </Switch>
         </Router>
       </Box>
+      </CuisinesContext.Provider>
+      </RecipesContext.Provider>
       </IsLoadingContext.Provider>
       </UserContext.Provider>
   );

@@ -1,6 +1,5 @@
-import { Grid, Box, Flex, Text, IconButton, Image, Skeleton } from "@chakra-ui/react";
+import { Grid, Box, Flex, Text, Image, Skeleton } from "@chakra-ui/react";
 import { useState, useEffect, useContext } from "react";
-import { GiMeal } from "react-icons/gi";
 import { IRecipe } from "../../Types";
 import FavouritesButton from "../Favourites/FavouritesButton";
 import { RecipeTag } from "../Misc/RecipeTag";
@@ -28,7 +27,7 @@ export default function ShowSpecials(): JSX.Element {
       <Grid overflowX="auto" gridAutoFlow="column">
         {specials.map((recipe) => {
           return (
-            <Box w={["45vw", "45vw", "30vw", "30vw", "10vw"]} 
+            <Box w={["45vw", "45vw", "30vw", "20vw", "10vw"]} 
               m={["2vw", "2vw", "2vw", "1vw", "1" ]} 
               key={recipe.id} >
               
@@ -36,24 +35,24 @@ export default function ShowSpecials(): JSX.Element {
                   src={recipe.image_url}
                   fallbackSrc={"https://cdn.dribbble.com/users/1012566/screenshots/4187820/topic-2.jpg"}
                   alt={recipe.name}
-                  boxSize={["45vw", "45vw", "30vw", "30vw", "10vw"]}
+                  boxSize={["45vw", "45vw", "30vw", "20vw", "10vw"]}
                   boxShadow="lg"
                   objectFit="cover"
                   borderTopRadius="10"
                   cursor="pointer"
                   onClick={() => window.open(recipe.url)} 
                 ></Image>
-              <Flex>
-              <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25} mt={2} mb={1}>{titleCase(recipe.name)}</Text>
-                <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}>
+              <Flex justifyContent="space-between" mt={2} mb={1}>
+              <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25}>{titleCase(recipe.name)}</Text>
+                {/* <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}> */}
                 <FavouritesButton recipe={{...recipe, cuisine:0, tags: []}} setSpecials={setSpecials} specials={specials}/> 
-                  <IconButton
+                  {/* <IconButton
                     aria-label="Add to mealplan"
                     // backgroundColor="teal"
                     icon={<GiMeal color="#66CCB5" />} 
                     size="sm"
-                  />
-                </Flex>
+                  /> */}
+                {/* </Flex> */}
               </Flex>
               <Flex flexWrap="wrap">
                 {recipe.tags

@@ -1,21 +1,29 @@
 import {
   Heading,
   Flex,
-  Icon,
   Spacer,
-  Link
+  Link,
+  forwardRef,
+  LinkProps,
+  IconButton
 } from "@chakra-ui/react";
 import { GiMeal } from "react-icons/gi";
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useHistory } from 'react-router-dom'
 import SignOut from "../Firebase/SignOut";
 import { useEffect, useContext } from "react";
 import { UserContext } from "../App";
 
 export default function MenuBarDesktop(): JSX.Element {
   const user = useContext(UserContext)
+  let history = useHistory() 
 
+  // Causes a refresh onAuthStateChanged
   useEffect(() => {
   }, [user])
+
+  const NavBarLink = forwardRef<LinkProps, "div">((props, ref) => (
+    <Link as={RouterLink} color="primary" fontWeight="bold" fontSize="xl" mr="2vw" _focus={{boxShadow:"none"}} {...props}/>
+  ));
 
   return (
     <Flex>
@@ -26,10 +34,10 @@ export default function MenuBarDesktop(): JSX.Element {
       </Flex>
       <Spacer />
       <Flex margin="auto" textAlign="center">
-        <Link as={RouterLink} to="/" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Recipes</Link>
-        <Link as={RouterLink} to="/favourites" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Favourites</Link>
-        <Link as={RouterLink} to="/plan" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Plan</Link>
-        <Link as={RouterLink} to="/add" color="primary" fontWeight="bold" fontSize="xl" mx="1vw">Add</Link>
+        <NavBarLink to="/">Recipes</NavBarLink>
+        <NavBarLink to="/favourites">Favourites</NavBarLink>
+        <NavBarLink to="/plan">Plan</NavBarLink>
+        <NavBarLink to="/add">Add</NavBarLink>
       </Flex>
       <Spacer />
       {
@@ -37,7 +45,7 @@ export default function MenuBarDesktop(): JSX.Element {
           <SignOut /> : 
           <Link as={RouterLink} to="/signin" color="primary" fontWeight="bold" fontSize="xl" mx="1vw" my="auto">Sign In</Link>
       }    
-        <Icon as={GiMeal} color="primary" h={55} w={55} cursor="pointer" />
+        <IconButton aria-label="Recipeasy logo" as={GiMeal} color="primary" h={55} w={55} cursor="pointer" variant="unstyled" onClick={() => history.push("/")}/>
     </Flex>
   );
 }
