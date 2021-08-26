@@ -11,11 +11,12 @@ import { firebaseConfig } from "./Firebase/config";
 import { createContext, useState } from "react";
 import MenuBarMobile from "./components/MenuBarMobile";
 import MenuBarDesktop from "./components/MenuBarDesktop";
+import FavouritesHome from "./components/Favourites/FavouritesHome";
 
 //Contexts
 export const firebaseApp = firebase.initializeApp(firebaseConfig); 
 export const IsLoadingContext = createContext(true)
-export const UserContext = createContext<firebase.User | undefined>(undefined)
+export const UserContext = createContext<firebase.User | undefined>(undefined) 
 
 
 function App() { 
@@ -68,9 +69,7 @@ function App() {
               </Box>
             </Route>
             <Route path="/favourites">
-              <Box textAlign="center" m="auto">
-                Favourites
-              </Box>
+              <FavouritesHome /> 
             </Route>
             <Route path="/admin">
               <Box textAlign="center" m="auto">

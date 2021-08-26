@@ -28,7 +28,7 @@ export default function ShowRecipes({
     };
     getRecipes();
   }, [isLoaded, user]);
-
+  
   const trueTags = Object.keys(tagsChosen).filter(
     (chosenTag) => tagsChosen[chosenTag]
   );
@@ -69,18 +69,18 @@ export default function ShowRecipes({
                   cursor="pointer"
                   onClick={() => window.open(recipe.url)}
                 ></Image>
-                <Flex>
-                  <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25} mt={2} mb={4}>{titleCase(recipe.name)}</Text>
-                  <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}>
+                <Flex justifyContent="space-between" mt={2} mb={4}>
+                  <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25}>{titleCase(recipe.name)}</Text>
+                  {/* <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}> */}
                     <FavouritesButton recipe={recipe} setRecipes={setRecipes} recipes={recipes}
                     /> 
-                    <IconButton
+                    {/* <IconButton
                       aria-label="Add to mealplan"   
                       // backgroundColor="teal"
                       icon={<GiMeal color="#66CCB5" />} 
                       size="sm"
-                    />
-                  </Flex>
+                    /> */}
+                  {/* </Flex> */}
                 </Flex> 
               </Box>
               </Skeleton>

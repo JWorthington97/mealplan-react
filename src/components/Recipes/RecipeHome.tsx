@@ -18,7 +18,7 @@ export default function RecipeHome(): JSX.Element {
     leftovers: false,
   });
   const isLoaded = useContext(IsLoadingContext)
- 
+
   useEffect(() => {
     const getCuisines = async () => {
       const response = await fetch(

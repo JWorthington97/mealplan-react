@@ -43,17 +43,17 @@ export default function ShowSpecials(): JSX.Element {
                   cursor="pointer"
                   onClick={() => window.open(recipe.url)} 
                 ></Image>
-              <Flex>
-              <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25} mt={2} mb={1}>{titleCase(recipe.name)}</Text>
-                <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}>
+              <Flex justifyContent="space-between" mt={2} mb={1}>
+              <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25}>{titleCase(recipe.name)}</Text>
+                {/* <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}> */}
                 <FavouritesButton recipe={{...recipe, cuisine:0, tags: []}} setSpecials={setSpecials} specials={specials}/> 
-                  <IconButton
+                  {/* <IconButton
                     aria-label="Add to mealplan"
                     // backgroundColor="teal"
                     icon={<GiMeal color="#66CCB5" />} 
                     size="sm"
-                  />
-                </Flex>
+                  /> */}
+                {/* </Flex> */}
               </Flex>
               <Flex flexWrap="wrap">
                 {recipe.tags

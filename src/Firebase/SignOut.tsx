@@ -8,7 +8,7 @@ interface SignOutProps {
 export default function SignOut({ onClose }: SignOutProps): JSX.Element {
     const toast = useToast()
 
-    const tttsignOut = async () => {
+    const signOut = async () => {
         await firebase.auth().signOut();
     }
 
@@ -17,7 +17,7 @@ export default function SignOut({ onClose }: SignOutProps): JSX.Element {
         size="sm"
         onClick={() => {
         // firebase.auth().signOut();
-        tttsignOut();
+        signOut();
         toast({
             title: "Signed out",
             status: "info",
