@@ -18,7 +18,7 @@ export default function ShowFavourites({
     const trueTags = Object.keys(tagsChosen).filter(
         (chosenTag) => tagsChosen[chosenTag]
       );
-      
+
     return (
         <SimpleGrid 
         minChildWidth={["45vw", "45vw", "30vw", "20vw", "10vw"]}
@@ -27,7 +27,11 @@ export default function ShowFavourites({
           {recipes
             // Filtering on Cuisine
             .filter(
-              (recipe) =>
+                (recipe) =>
+                  recipe.infavourites === 1 
+              )
+            .filter(
+              (recipe) => 
                 recipe.cuisine === parseInt(cuisineChosen) || cuisineChosen === ""
             )
             // Filtering on Tags

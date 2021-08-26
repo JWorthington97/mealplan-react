@@ -45,7 +45,7 @@ export const postFavourites = async ({recipeID, userID, setRecipes, setSpecials,
         if (recipes && setRecipes) {
           const newRecipes = recipes
           .map((recipe) => recipe.id === recipeID ?
-            ({...recipe, infavourites : recipe.infavourites ? false : true}) :
+            ({...recipe, infavourites : recipe.infavourites ? 0 : 1}) :
             {...recipe}
             )
           setRecipes(newRecipes)
@@ -53,7 +53,7 @@ export const postFavourites = async ({recipeID, userID, setRecipes, setSpecials,
         else if (specials && setSpecials) {
           const newSpecials = specials
           .map((specials) => specials.id === recipeID ?
-            ({...specials, infavourites : specials.infavourites ? false : true}) 
+            ({...specials, infavourites : specials.infavourites ? 0 : 1}) 
             : {...specials}
             )
           setSpecials(newSpecials)

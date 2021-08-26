@@ -7,7 +7,7 @@ export interface IRecipe {
   url: string;
   image_url: string;
   tags: string;
-  infavourites: boolean;
+  infavourites: number;
 }
 
 export interface IRecipeFormatted {
@@ -17,7 +17,7 @@ export interface IRecipeFormatted {
   url: string;
   image_url: string;
   tags: string[];
-  infavourites: boolean;
+  infavourites: number;
 }
 
 export type ExtendTagProps = TagProps & {
