@@ -4,38 +4,25 @@ import { GiMeal } from "react-icons/gi";
 import { IRecipe, IRecipeFormatted, ShowRecipesProps } from "../../Types";
 import FavouritesButton from "../Favourites/FavouritesButton";
 import { titleCase } from "title-case";
-import { IsLoadingContext, UserContext } from "../../App";
+import { IsLoadingContext, RecipesContext, UserContext } from "../../App";
 
 export default function ShowRecipes({
   tagsChosen,
   cuisineChosen,
   recipeSearch
 }: ShowRecipesProps): JSX.Element {
-  const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
+  // const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
   const isLoaded = useContext(IsLoadingContext)
   const user = useContext(UserContext)
+  const {recipes, setRecipes}  = useContext(RecipesContext)
 
-  useEffect(() => {
-    const getRecipes = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/recipes/${user?.uid}` 
-      );
-      const body = await response.json();
-      const formatted: IRecipeFormatted[] = body.map((recipe: IRecipe) => {
-        return { ...recipe, tags: recipe.tags.split(", ") };
-      });
-      setRecipes(formatted);
-    };
-    getRecipes();
-  }, [isLoaded, user]);
-  
   const trueTags = Object.keys(tagsChosen).filter(
     (chosenTag) => tagsChosen[chosenTag]
   );
 
   return (
     <SimpleGrid 
-    minChildWidth={["45vw", "45vw", "30vw", "30vw", "10vw"]}
+    minChildWidth={["45vw", "45vw", "30vw", "20vw", "10vw"]}
     m={["2vw", "2vw", "2vw", "1vw", "1" ]}
     >
       {recipes
@@ -57,12 +44,12 @@ export default function ShowRecipes({
           return (
             <Box key={recipe.id}>
               <Skeleton isLoaded={!isLoaded}>
-              <Box w={["45vw", "45vw", "30vw", "30vw", "10vw"]} m="auto">
+              <Box w={["45vw", "45vw", "30vw", "20vw", "10vw"]} m="auto">
                 <Image
                   src={recipe.image_url}
                   fallbackSrc={"https://cdn.dribbble.com/users/1012566/screenshots/4187820/topic-2.jpg"}
                   alt={recipe.name}
-                  boxSize={["45vw", "45vw", "30vw", "30vw", "10vw"]} 
+                  boxSize={["45vw", "45vw", "30vw", "20vw", "10vw"]} 
                   boxShadow="lg" 
                   objectFit="cover"
                   borderTopRadius="10"

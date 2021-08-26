@@ -28,7 +28,7 @@ export default function ShowSpecials(): JSX.Element {
       <Grid overflowX="auto" gridAutoFlow="column">
         {specials.map((recipe) => {
           return (
-            <Box w={["45vw", "45vw", "30vw", "30vw", "10vw"]} 
+            <Box w={["45vw", "45vw", "30vw", "20vw", "10vw"]} 
               m={["2vw", "2vw", "2vw", "1vw", "1" ]} 
               key={recipe.id} >
               
@@ -36,7 +36,7 @@ export default function ShowSpecials(): JSX.Element {
                   src={recipe.image_url}
                   fallbackSrc={"https://cdn.dribbble.com/users/1012566/screenshots/4187820/topic-2.jpg"}
                   alt={recipe.name}
-                  boxSize={["45vw", "45vw", "30vw", "30vw", "10vw"]}
+                  boxSize={["45vw", "45vw", "30vw", "20vw", "10vw"]}
                   boxShadow="lg"
                   objectFit="cover"
                   borderTopRadius="10"
