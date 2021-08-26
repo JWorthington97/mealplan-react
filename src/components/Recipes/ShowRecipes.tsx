@@ -1,10 +1,9 @@
-import { Box, Flex, Text, IconButton, Image, SimpleGrid, Skeleton } from "@chakra-ui/react";
-import { useState, useEffect, useContext } from "react";
-import { GiMeal } from "react-icons/gi";
-import { IRecipe, IRecipeFormatted, ShowRecipesProps } from "../../Types";
+import { Box, Flex, Text, Image, SimpleGrid, Skeleton } from "@chakra-ui/react";
+import { useContext } from "react";
+import { ShowRecipesProps } from "../../Types";
 import FavouritesButton from "../Favourites/FavouritesButton";
 import { titleCase } from "title-case";
-import { IsLoadingContext, RecipesContext, UserContext } from "../../App";
+import { IsLoadingContext, RecipesContext } from "../../App";
 
 export default function ShowRecipes({
   tagsChosen,
@@ -13,7 +12,6 @@ export default function ShowRecipes({
 }: ShowRecipesProps): JSX.Element {
   // const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
   const isLoaded = useContext(IsLoadingContext)
-  const user = useContext(UserContext)
   const {recipes, setRecipes}  = useContext(RecipesContext)
 
   const trueTags = Object.keys(tagsChosen).filter(

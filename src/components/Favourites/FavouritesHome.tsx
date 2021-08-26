@@ -1,12 +1,11 @@
 import { Flex, HStack, Input, Select, Skeleton, Spacer, Text } from '@chakra-ui/react'
 import ShowFavourites from './ShowFavourites'
-import { useState, useEffect, useContext } from 'react'
-import { ICuisine, IRecipeTags } from '../../Types';
+import { useState, useContext } from 'react'
+import { IRecipeTags } from '../../Types';
 import { RecipeTag } from '../Misc/RecipeTag';
-import { IsLoadingContext } from '../../App';
+import { CuisinesContext, IsLoadingContext } from '../../App';
 
 export default function FavouritesHome(): JSX.Element {
-  const [cuisines, setCuisines] = useState<ICuisine[]>([]);
   const [cuisineChosen, setCuisineChosen] = useState<string>("");
   const [recipeSearch, setRecipeSearch] = useState("")
   const [tagsChosen, setTagsChosen] = useState<IRecipeTags>({
@@ -16,20 +15,9 @@ export default function FavouritesHome(): JSX.Element {
     vegan: false,
     leftovers: false,
   });
-  const isLoaded = useContext(IsLoadingContext) 
 
-    // can extrapolate this out and share with recipes home instead. No need for 2 api calls 
-    // then convert all the search, tags, cuisine into a component to share that too
-  useEffect(() => {
-    const getCuisines = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/cuisines`
-      );
-      const body = await response.json();
-      setCuisines(body);
-    };
-    getCuisines();
-  }, []);
+  const isLoaded = useContext(IsLoadingContext) 
+  const cuisines = useContext(CuisinesContext)
 
     return (
       <>

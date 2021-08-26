@@ -2,12 +2,11 @@ import { Flex, Input, Spacer, Select, Divider, HStack, Text, Skeleton } from "@c
 import ShowRecipes from "./ShowRecipes";
 import ShowSpecials from "./ShowSpecials";
 import { RecipeTag } from "../Misc/RecipeTag";
-import { useState, useEffect, useContext } from "react";
-import { IRecipeTags, ICuisine } from "../../Types";
-import { IsLoadingContext } from "../../App";
+import { useState, useContext } from "react";
+import { IRecipeTags } from "../../Types";
+import { CuisinesContext, IsLoadingContext } from "../../App";
 
 export default function RecipeHome(): JSX.Element {
-  const [cuisines, setCuisines] = useState<ICuisine[]>([]);
   const [cuisineChosen, setCuisineChosen] = useState<string>("");
   const [recipeSearch, setRecipeSearch] = useState("")
   const [tagsChosen, setTagsChosen] = useState<IRecipeTags>({
@@ -17,18 +16,9 @@ export default function RecipeHome(): JSX.Element {
     vegan: false,
     leftovers: false,
   });
-  const isLoaded = useContext(IsLoadingContext)
 
-  useEffect(() => {
-    const getCuisines = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/cuisines`
-      );
-      const body = await response.json();
-      setCuisines(body);
-    };
-    getCuisines();
-  }, []);
+  const isLoaded = useContext(IsLoadingContext)
+  const cuisines = useContext(CuisinesContext)
    
   return (
     <>

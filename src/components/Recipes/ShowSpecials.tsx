@@ -1,6 +1,5 @@
-import { Grid, Box, Flex, Text, IconButton, Image, Skeleton } from "@chakra-ui/react";
+import { Grid, Box, Flex, Text, Image, Skeleton } from "@chakra-ui/react";
 import { useState, useEffect, useContext } from "react";
-import { GiMeal } from "react-icons/gi";
 import { IRecipe } from "../../Types";
 import FavouritesButton from "../Favourites/FavouritesButton";
 import { RecipeTag } from "../Misc/RecipeTag";

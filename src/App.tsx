@@ -12,7 +12,7 @@ import { createContext, useState, useEffect } from "react";
 import MenuBarMobile from "./components/MenuBarMobile";
 import MenuBarDesktop from "./components/MenuBarDesktop";
 import FavouritesHome from "./components/Favourites/FavouritesHome";
-import { IRecipe, IRecipeFormatted } from "./Types";
+import { ICuisine, IRecipe, IRecipeFormatted } from "./Types";
 
 //Contexts
 export const firebaseApp = firebase.initializeApp(firebaseConfig); 
@@ -24,14 +24,16 @@ type TRecipe = {
   setRecipes(recipes: IRecipeFormatted[]): void
 }
 export const RecipesContext = createContext<TRecipe>({recipes: [], setRecipes: () => console.log()})
-
+export const CuisinesContext = createContext<ICuisine[]>([])
 
 function App() { 
   const [isLoading, setIsLoading] = useState(true)
   const [user, setUser] = useState<firebase.User | undefined>(undefined)
   const [isDesktop] = useMediaQuery("(min-width: 1280px)")
   const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
+  const [cuisines, setCuisines] = useState<ICuisine[]>([])
 
+  // Get Recipes. Potential to join specials flag onto this as well
   useEffect(() => {
     const getRecipes = async () => {
       const response = await fetch(
@@ -46,6 +48,18 @@ function App() {
     getRecipes();
   }, [isLoading, user]); // is loading here mgiht need to be not here
 
+  // Get Cuisines
+  useEffect(() => {
+    const getCuisines = async () => {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/cuisines`
+      );
+      const body = await response.json();
+      setCuisines(body);
+    };
+    getCuisines();
+  }, []);
+
   firebase.auth().onAuthStateChanged((user) => {
     setIsLoading(false)
     if (user) {
@@ -56,14 +70,11 @@ function App() {
     }
   })
 
-    // if (!isLoading) {
-    //   // return <Spinner left="50%" color="primary"/>
-    // } 
-
   return (
     <UserContext.Provider value={user}>
     <IsLoadingContext.Provider value={isLoading}>
       <RecipesContext.Provider value={{recipes, setRecipes}}>
+        <CuisinesContext.Provider value={cuisines}>
       <Box width="100%" maxWidth="1024px" margin="auto">
         <Router>
           <Skeleton isLoaded={!isLoading}>
@@ -101,6 +112,7 @@ function App() {
           </Switch>
         </Router>
       </Box>
+      </CuisinesContext.Provider>
       </RecipesContext.Provider>
       </IsLoadingContext.Provider>
       </UserContext.Provider>
