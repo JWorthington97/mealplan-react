@@ -40,7 +40,6 @@ function App() {
   const [isDesktop] = useMediaQuery("(min-width: 1280px)");
   const [user, setUser] = useState<User | undefined>(undefined);  
   const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
-  const [specials, setSpecials] = useState<IRecipe[]>([]);
   const [cuisines, setCuisines] = useState<ICuisine[]>([]);  
 
   // Get Recipes. Potential to join specials flag onto this as well
@@ -57,18 +56,6 @@ function App() {
     };
     getRecipes();
   }, [isLoading, user]); // is loading here might need to be not here
-
-  //Get Specials. This and recipes likely made a context instead
-  // useEffect(() => {
-  //   const getSpecials = async () => {
-  //     const response = await fetch(
-  //       `${process.env.REACT_APP_BACKEND_URL}/specials/${user?.uid}`
-  //     );
-  //     const body = await response.json();
-  //     setSpecials(body);
-  //   };
-  //   getSpecials();
-  // }, [isLoading, user]);
 
   // Get Cuisines
   useEffect(() => {
@@ -95,7 +82,6 @@ function App() {
     <UserContext.Provider value={user}>
       <IsLoadingContext.Provider value={isLoading}>
         <RecipesContext.Provider value={{ recipes, setRecipes }}>
-          <SpecialsContext.Provider value={{ specials, setSpecials }}>
             <CuisinesContext.Provider value={cuisines}>
               <Box backgroundColor="#fefefb">
                 <Box width="100%" maxWidth="1024px" margin="auto">
@@ -140,7 +126,6 @@ function App() {
                 </Box>
               </Box>
             </CuisinesContext.Provider>
-          </SpecialsContext.Provider>
         </RecipesContext.Provider>
       </IsLoadingContext.Provider>
     </UserContext.Provider>

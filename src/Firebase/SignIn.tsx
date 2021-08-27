@@ -1,6 +1,7 @@
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  sendEmailVerification,
 } from "firebase/auth";
 import { auth } from "../App";
 import { useContext, useState } from "react";
@@ -15,6 +16,7 @@ import {
   Box,
   Flex,
   Divider,
+  createStandaloneToast,
 } from "@chakra-ui/react";
 
 type Inputs = {
@@ -55,10 +57,19 @@ export default function SignInScreen() {
             // need a state to add an error to
           })
       : createUserWithEmailAndPassword(auth, data.email, data.password)
-          .then(() => {
+          .then((userCredential) => {
             // Signed in
             // const user = userCredential.user;
             setFirebaseError("");
+            sendEmailVerification(userCredential.user) 
+            const toast = createStandaloneToast();
+            toast({
+              title: "Account created!",
+              description: "We have sent an email with a confirmation link to your email address.",
+              status: "success",
+              duration: 5000,
+              isClosable: true,
+            });
             history.push("/");
             // ...
           })
