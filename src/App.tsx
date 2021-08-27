@@ -84,7 +84,7 @@ function App() {
         <RecipesContext.Provider value={{ recipes, setRecipes }}>
             <CuisinesContext.Provider value={cuisines}>
               <Box backgroundColor="#fefefb">
-                <Box width="100%" maxWidth="1024px" margin="auto">
+                <Box width="100%" maxWidth="1024px" minHeight="100vh" margin="auto">
                   <Router>
                     <Skeleton isLoaded={!isLoading}>
                       <Box>
