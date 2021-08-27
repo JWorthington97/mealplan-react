@@ -59,16 +59,16 @@ function App() {
   }, [isLoading, user]); // is loading here might need to be not here
 
   //Get Specials. This and recipes likely made a context instead
-  useEffect(() => {
-    const getSpecials = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/specials/${user?.uid}`
-      );
-      const body = await response.json();
-      setSpecials(body);
-    };
-    getSpecials();
-  }, [isLoading, user]);
+  // useEffect(() => {
+  //   const getSpecials = async () => {
+  //     const response = await fetch(
+  //       `${process.env.REACT_APP_BACKEND_URL}/specials/${user?.uid}`
+  //     );
+  //     const body = await response.json();
+  //     setSpecials(body);
+  //   };
+  //   getSpecials();
+  // }, [isLoading, user]);
 
   // Get Cuisines
   useEffect(() => {
@@ -87,7 +87,7 @@ function App() {
     if (user) {
       setUser(user);
     } else {
-      setUser(undefined);
+      setUser(undefined); 
     }
   });
 

@@ -8,6 +8,7 @@ export interface IRecipe {
   image_url: string;
   tags: string;
   infavourites: number;
+  specials: number;
 }
 
 export interface IRecipeFormatted {
@@ -18,6 +19,7 @@ export interface IRecipeFormatted {
   image_url: string;
   tags: string[];
   infavourites: number;
+  specials: number;
 }
 
 export type ExtendTagProps = TagProps & {

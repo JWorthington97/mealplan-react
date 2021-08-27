@@ -1,28 +1,25 @@
 import { IconButton, useToast } from "@chakra-ui/react";
 import { RiHeart2Line } from "react-icons/ri";
 import { postFavourites } from "../Favourites/postFavourites";
-import { IRecipe, IRecipeFormatted } from "../../Types";
-import { UserContext } from "../../App";
+import { IRecipeFormatted } from "../../Types";
+import { RecipesContext, UserContext } from "../../App";
 import { useContext } from "react";
 
 interface FavouritesButtonProps {
   recipe: IRecipeFormatted;
-  setRecipes?(recipes: IRecipeFormatted[]): void | undefined;
-  setSpecials?(specials: IRecipe[]): void | undefined;
-  recipes?: IRecipeFormatted[] | undefined;
-  specials?: IRecipe[] | undefined;
+  // recipes: IRecipeFormatted[];
+  // setRecipes(recipes: IRecipeFormatted[]): void;
 }
 
 export default function FavouritesButton({
   recipe,
-  setRecipes,
-  setSpecials,
-  recipes,
-  specials,
+  // setRecipes,
+  // recipes
 }: FavouritesButtonProps): JSX.Element {
   const { id, infavourites } = recipe;
   const user = useContext(UserContext);
   const toast = useToast();
+  const { recipes, setRecipes } = useContext(RecipesContext)
 
   return (
     <IconButton
@@ -32,14 +29,12 @@ export default function FavouritesButton({
       size="sm"
       mr={["1vw", "1vw", "1vw", "1vw", "2%"]}
       onClick={() => {
-        user
+        user 
           ? postFavourites({
               recipeID: id,
               userID: user?.uid || "",
               setRecipes,
-              setSpecials,
               recipes,
-              specials,
             })
           : toast({
               title: "Not signed in.",

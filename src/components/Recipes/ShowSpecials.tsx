@@ -3,17 +3,20 @@ import { useContext } from "react";
 import FavouritesButton from "../Favourites/FavouritesButton";
 import { RecipeTag } from "../Misc/RecipeTag";
 import { titleCase } from "title-case";
-import { IsLoadingContext, SpecialsContext } from "../../App";
+import { IsLoadingContext, RecipesContext } from "../../App";
 import { GiMeal } from "react-icons/gi";
 
 export default function ShowSpecials(): JSX.Element {
   const isLoaded = useContext(IsLoadingContext);
-  const { specials, setSpecials } = useContext(SpecialsContext) 
+  // const { specials, setSpecials } = useContext(SpecialsContext) 
+  const { recipes } = useContext(RecipesContext)
 
   return (
     <Skeleton isLoaded={!isLoaded}>
       <Grid overflowX="auto" gridAutoFlow="column">
-        {specials.map((recipe) => {
+        {recipes
+        .filter((recipe) => recipe.specials === 1)
+        .map((recipe) => {
           return (
             <Box
               w={["45vw", "45vw", "30vw", "20vw", "10vw"]}
@@ -54,8 +57,7 @@ export default function ShowSpecials(): JSX.Element {
                 </Text>
                 <FavouritesButton
                   recipe={{ ...recipe, cuisine: 0, tags: [] }}
-                  setSpecials={setSpecials}
-                  specials={specials}
+     
                 />
                 {/* <IconButton
                     aria-label="Add to mealplan"
@@ -67,7 +69,6 @@ export default function ShowSpecials(): JSX.Element {
               </Flex>
               <Flex flexWrap="wrap">
                 {recipe.tags
-                  .split(", ")
                   .sort()
                   .map((tag) => {
                     return (

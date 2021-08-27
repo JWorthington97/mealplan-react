@@ -77,8 +77,8 @@ export default function ShowFavourites({
                     </Text>
                     <FavouritesButton
                       recipe={recipe}
-                      setRecipes={setRecipes}
-                      recipes={recipes}
+                      // setRecipes={setRecipes}
+                      // recipes={recipes}
                     />
                     {/* <IconButton
                           aria-label="Add to mealplan"   

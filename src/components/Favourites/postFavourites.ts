@@ -16,9 +16,7 @@ export const postFavourites = async ({
   recipeID,
   userID,
   setRecipes,
-  setSpecials,
   recipes,
-  specials,
 }: PostFavouritesProps) => {
   let toastMessage: { title: string; status: toastStatus } = {
     title: "Added to your favourites.",
@@ -50,21 +48,27 @@ export const postFavourites = async ({
         status: "info",
       };
     } else {
-      if (recipes && setRecipes) {
-        const newRecipes = recipes.map((recipe) =>
+      const newRecipes = recipes!.map((recipe) =>
           recipe.id === recipeID
             ? { ...recipe, infavourites: recipe.infavourites ? 0 : 1 }
             : { ...recipe }
         );
-        setRecipes(newRecipes);
-      } else if (specials && setSpecials) {
-        const newSpecials = specials.map((specials) =>
-          specials.id === recipeID
-            ? { ...specials, infavourites: specials.infavourites ? 0 : 1 }
-            : { ...specials }
-        );
-        setSpecials(newSpecials);
-      }
+      setRecipes!(newRecipes);
+      // if (recipes && setRecipes) {
+      //   const newRecipes = recipes.map((recipe) =>
+      //     recipe.id === recipeID
+      //       ? { ...recipe, infavourites: recipe.infavourites ? 0 : 1 }
+      //       : { ...recipe }
+      //   );
+      //   setRecipes(newRecipes);
+      // } else if (specials && setSpecials) {
+      //   const newSpecials = specials.map((specials) =>
+      //     specials.id === recipeID
+      //       ? { ...specials, infavourites: specials.infavourites ? 0 : 1 }
+      //       : { ...specials }
+      //   );
+      //   setSpecials(newSpecials);
+      // }
     }
   }
 

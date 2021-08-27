@@ -78,8 +78,8 @@ export default function ShowRecipes({
                     {/* <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}> */}
                     <FavouritesButton
                       recipe={recipe}
-                      setRecipes={setRecipes}
-                      recipes={recipes}
+                      // setRecipes={setRecipes}
+                      // recipes={recipes}
                     />
                     {/* <IconButton
                       aria-label="Add to mealplan"   
