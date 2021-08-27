@@ -1,9 +1,12 @@
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../App";
 import { useContext, useState } from "react";
 import { UserContext } from "../App";
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { useHistory } from 'react-router-dom'
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import {
   FormLabel,
   FormControl,
@@ -11,93 +14,114 @@ import {
   Button,
   Box,
   Flex,
-  Divider
+  Divider,
 } from "@chakra-ui/react";
 
 type Inputs = {
-  email: string,
-  password: string,
+  email: string;
+  password: string;
 };
 
 export default function SignInScreen() {
-  const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
-  const [firebaseError, setFirebaseError] = useState("")
-  const history = useHistory()
-  const [signUpOrSignIn, setSignUpOrSignIn] = useState("signin")
-  const user = useContext(UserContext)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const [firebaseError, setFirebaseError] = useState("");
+  const history = useHistory();
+  const [signUpOrSignIn, setSignUpOrSignIn] = useState("signin");
+  const user = useContext(UserContext);
 
-  const onSubmit: SubmitHandler<Inputs> = data => { 
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
     if (user) {
-      setFirebaseError("Already logged in!")
-      return
+      setFirebaseError("Already logged in!");
+      return;
     }
 
-    signUpOrSignIn === "signin" ?
-      signInWithEmailAndPassword(auth, data.email, data.password)
-      .then(() => {
-        // Signed in 
-        // const user = userCredential.user;
-        history.push("/")
-        // ...
-      })
-      .catch((error) => {
-        // const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(error.message)
-        setFirebaseError(errorMessage)
-        // need a state to add an error to 
-      }) : 
-      createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then(() => {
-        // Signed in 
-        // const user = userCredential.user;
-        history.push("/")
-        // ... 
-      })
-      .catch((error) => {
-        // const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-        console.log(error.message)
-        setFirebaseError(errorMessage)
-      });
-  }
+    signUpOrSignIn === "signin"
+      ? signInWithEmailAndPassword(auth, data.email, data.password)
+          .then(() => {
+            // Signed in
+            // const user = userCredential.user;
+            history.push("/");
+            // ...
+          })
+          .catch((error) => {
+            // const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(error.message);
+            setFirebaseError(errorMessage);
+            // need a state to add an error to
+          })
+      : createUserWithEmailAndPassword(auth, data.email, data.password)
+          .then(() => {
+            // Signed in
+            // const user = userCredential.user;
+            setFirebaseError("");
+            history.push("/");
+            // ...
+          })
+          .catch((error) => {
+            // const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+            console.log(error.message);
+            setFirebaseError(errorMessage);
+          });
+  };
 
   // console.log(watch("email")) // watch input value by passing the name of it
 
- 
   return (
-
     <Box w={["90%", "90%", "50%", "50%", "50%"]} m="auto">
       <Flex w="100%" m="auto" justifyContent="center" mr="1">
-        <Button variant="flushed" onClick={() => setSignUpOrSignIn("signin")}>Sign In</Button>
-        <Divider orientation="vertical" colorScheme="blackAlpha"/> 
-        <Button variant="ghost" onClick={() => setSignUpOrSignIn("signup")}>Sign Up</Button>
+        <Button variant="flushed" onClick={() => setSignUpOrSignIn("signin")}>
+          Sign In
+        </Button>
+        <Divider orientation="vertical" colorScheme="blackAlpha" />
+        <Button variant="ghost" onClick={() => setSignUpOrSignIn("signup")}>
+          Sign Up
+        </Button>
       </Flex>
-    <Box >
-    {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */ } 
       <Box>
-      <form onSubmit={handleSubmit(onSubmit)} >
-        <FormControl >
-          {/* register your input into the hook by invoking the "register" function */}
-          <FormLabel htmlFor="email" />
-          <Input placeholder="Email" {...register("email", { required: true })} variant="flushed"  _focus={{borderColor:"black"}}/>
-          
-          {/* include validation with required or other standard HTML validation rules */}
-          <FormLabel htmlFor="password" />
-          <Input placeholder="Password" type="password" {...register("password", { required: true })} variant="flushed" _focus={{borderColor:"black"}}/>
-          {/* errors will return when field validation fails  */} 
-          {errors.email && <Box>Email is Required</Box>}
-          {errors.password && <Box>Need to put password validation stuff in here</Box>}
-          
-          <Button mt={4} type="submit" backgroundColor="primary" w="10ch">{signUpOrSignIn === "signin" ? "Sign In" : "Sign Up"}</Button>
-        </FormControl>
-      </form>
-      {firebaseError && <Box color="red">{firebaseError}</Box>}
+        {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
+        <Box>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <FormControl>
+              {/* register your input into the hook by invoking the "register" function */}
+              <FormLabel htmlFor="email" />
+              <Input
+                placeholder="Email"
+                {...register("email", { required: true })}
+                variant="flushed"
+                _focus={{ borderColor: "black" }}
+              />
+
+              {/* include validation with required or other standard HTML validation rules */}
+              <FormLabel htmlFor="password" />
+              <Input
+                placeholder="Password"
+                type="password"
+                {...register("password", { required: true })}
+                variant="flushed"
+                _focus={{ borderColor: "black" }}
+              />
+              {/* errors will return when field validation fails  */}
+              {errors.email && <Box>Email is Required</Box>}
+              {errors.password && (
+                <Box>Need to put password validation stuff in here</Box>
+              )}
+
+              <Button mt={4} type="submit" backgroundColor="primary" w="10ch">
+                {signUpOrSignIn === "signin" ? "Sign In" : "Sign Up"}
+              </Button>
+            </FormControl>
+          </form>
+          {firebaseError && <Box color="red">{firebaseError}</Box>}
+        </Box>
+        {/* } */}
       </Box>
-    {/* } */}
     </Box>
-    </Box>
-    
   );
 }

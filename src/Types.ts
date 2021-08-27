@@ -8,6 +8,7 @@ export interface IRecipe {
   image_url: string;
   tags: string;
   infavourites: number;
+  specials: number;
 }
 
 export interface IRecipeFormatted {
@@ -18,6 +19,7 @@ export interface IRecipeFormatted {
   image_url: string;
   tags: string[];
   infavourites: number;
+  specials: number;
 }
 
 export type ExtendTagProps = TagProps & {
@@ -36,7 +38,14 @@ export interface ICuisine {
 }
 
 export interface ShowRecipesProps {
-    tagsChosen: IRecipeTags;
-    cuisineChosen: string;
-    recipeSearch: string;
-  }
+  tagsChosen: IRecipeTags;
+  cuisineChosen: string;
+  recipeSearch: string;
+}
+
+export interface PostAndDeleteFavouritesProps {
+  recipeID: number;
+  userID: string;
+  setRecipes(recipes: IRecipeFormatted[]): void;
+  recipes: IRecipeFormatted[];
+}
