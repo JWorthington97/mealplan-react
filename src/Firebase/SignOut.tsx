@@ -1,7 +1,8 @@
 import { Button, useToast } from "@chakra-ui/react";
-import firebase from "firebase/app";
+// import firebase from "firebase/app";
+import { signOut } from "firebase/auth";
 import { useHistory } from "react-router-dom";
-
+import { auth } from '../App'
 interface SignOutProps {
     onClose?(): void,
 
@@ -10,8 +11,9 @@ export default function SignOut({ onClose }: SignOutProps): JSX.Element {
     const toast = useToast()
     let history = useHistory()
 
-    const signOut = async () => {
-        await firebase.auth().signOut();
+    const userSignOut = async () => {
+        // await firebase.auth().signOut();
+        signOut(auth)
         history.push("/")
     }
 
@@ -20,7 +22,7 @@ export default function SignOut({ onClose }: SignOutProps): JSX.Element {
         size="sm"
         onClick={() => {
         // firebase.auth().signOut();
-        signOut();
+        userSignOut();
         toast({
             title: "Signed out",
             status: "info",
