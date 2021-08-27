@@ -36,7 +36,7 @@ export interface ICuisine {
 }
 
 export interface ShowRecipesProps {
-    tagsChosen: IRecipeTags;
-    cuisineChosen: string;
-    recipeSearch: string;
-  }
+  tagsChosen: IRecipeTags;
+  cuisineChosen: string;
+  recipeSearch: string;
+}

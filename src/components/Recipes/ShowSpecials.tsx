@@ -8,8 +8,8 @@ import { IsLoadingContext, UserContext } from "../../App";
 
 export default function ShowSpecials(): JSX.Element {
   const [specials, setSpecials] = useState<IRecipe[]>([]);
-  const isLoaded = useContext(IsLoadingContext)
-  const user = useContext(UserContext)
+  const isLoaded = useContext(IsLoadingContext);
+  const user = useContext(UserContext);
 
   useEffect(() => {
     const getSpecials = async () => {
@@ -27,26 +27,37 @@ export default function ShowSpecials(): JSX.Element {
       <Grid overflowX="auto" gridAutoFlow="column">
         {specials.map((recipe) => {
           return (
-            <Box w={["45vw", "45vw", "30vw", "20vw", "10vw"]} 
-              m={["2vw", "2vw", "2vw", "1vw", "1" ]} 
-              key={recipe.id} >
-              
-                <Image
-                  src={recipe.image_url}
-                  fallbackSrc={"https://cdn.dribbble.com/users/1012566/screenshots/4187820/topic-2.jpg"}
-                  alt={recipe.name}
-                  boxSize={["45vw", "45vw", "30vw", "20vw", "10vw"]}
-                  boxShadow="lg"
-                  objectFit="cover"
-                  borderTopRadius="10"
-                  cursor="pointer"
-                  onClick={() => window.open(recipe.url)} 
-                ></Image>
+            <Box
+              w={["45vw", "45vw", "30vw", "20vw", "10vw"]}
+              m={["2vw", "2vw", "2vw", "1vw", "1"]}
+              key={recipe.id}
+            >
+              <Image
+                src={recipe.image_url}
+                fallbackSrc={
+                  "https://cdn.dribbble.com/users/1012566/screenshots/4187820/topic-2.jpg"
+                }
+                alt={recipe.name}
+                boxSize={["45vw", "45vw", "30vw", "20vw", "10vw"]}
+                boxShadow="lg"
+                objectFit="cover"
+                borderTopRadius="10"
+                cursor="pointer"
+                onClick={() => window.open(recipe.url)}
+              ></Image>
               <Flex justifyContent="space-between" mt={2} mb={1}>
-              <Text fontSize={["sm", "xl", "lg", "2xl", "md"]} lineHeight={1.25}>{titleCase(recipe.name)}</Text>
-                {/* <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}> */}
-                <FavouritesButton recipe={{...recipe, cuisine:0, tags: []}} setSpecials={setSpecials} specials={specials}/> 
-                  {/* <IconButton
+                <Text
+                  fontSize={["sm", "xl", "lg", "2xl", "md"]}
+                  lineHeight={1.25}
+                >
+                  {titleCase(recipe.name)}
+                </Text>
+                <FavouritesButton
+                  recipe={{ ...recipe, cuisine: 0, tags: [] }}
+                  setSpecials={setSpecials}
+                  specials={specials}
+                />
+                {/* <IconButton
                     aria-label="Add to mealplan"
                     // backgroundColor="teal"
                     icon={<GiMeal color="#66CCB5" />} 
@@ -60,13 +71,19 @@ export default function ShowSpecials(): JSX.Element {
                   .sort()
                   .map((tag) => {
                     return (
-                      <RecipeTag tagVariant={tag} key={tag} isSelected={true} mr={0.5} mb={0.5}/> 
+                      <RecipeTag
+                        tagVariant={tag}
+                        key={tag}
+                        isSelected={true}
+                        mr={0.5}
+                        mb={0.5}
+                      />
                     );
                   })}
               </Flex>
             </Box>
           );
-        })} 
+        })}
       </Grid>
     </Skeleton>
   );
