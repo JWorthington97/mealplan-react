@@ -1,23 +1,14 @@
 import { createStandaloneToast } from "@chakra-ui/react";
-import { IRecipe, IRecipeFormatted } from "../../Types";
-
-interface PostFavouritesProps {
-  recipeID: number;
-  userID: string;
-  setRecipes?(recipes: IRecipeFormatted[]): void | undefined;
-  setSpecials?(specials: IRecipe[]): void | undefined;
-  recipes?: IRecipeFormatted[];
-  specials?: IRecipe[];
-}
+import { PostAndDeleteFavouritesProps } from "../../Types";
 
 type toastStatus = "success" | "info" | "warning" | "error" | undefined;
 
-export const postFavourites = async ({
+export default async function postFavourites({
   recipeID,
   userID,
   setRecipes,
   recipes,
-}: PostFavouritesProps) => {
+}: PostAndDeleteFavouritesProps) {
   let toastMessage: { title: string; status: toastStatus } = {
     title: "Added to your favourites.",
     status: "success",
@@ -54,21 +45,6 @@ export const postFavourites = async ({
             : { ...recipe }
         );
       setRecipes!(newRecipes);
-      // if (recipes && setRecipes) {
-      //   const newRecipes = recipes.map((recipe) =>
-      //     recipe.id === recipeID
-      //       ? { ...recipe, infavourites: recipe.infavourites ? 0 : 1 }
-      //       : { ...recipe }
-      //   );
-      //   setRecipes(newRecipes);
-      // } else if (specials && setSpecials) {
-      //   const newSpecials = specials.map((specials) =>
-      //     specials.id === recipeID
-      //       ? { ...specials, infavourites: specials.infavourites ? 0 : 1 }
-      //       : { ...specials }
-      //   );
-      //   setSpecials(newSpecials);
-      // }
     }
   }
 

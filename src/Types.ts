@@ -42,3 +42,10 @@ export interface ShowRecipesProps {
   cuisineChosen: string;
   recipeSearch: string;
 }
+
+export interface PostAndDeleteFavouritesProps {
+  recipeID: number;
+  userID: string;
+  setRecipes(recipes: IRecipeFormatted[]): void;
+  recipes: IRecipeFormatted[];
+}

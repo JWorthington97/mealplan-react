@@ -13,7 +13,7 @@ export default function ShowRecipes({
 }: ShowRecipesProps): JSX.Element {
   // const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
   const isLoaded = useContext(IsLoadingContext);
-  const { recipes, setRecipes } = useContext(RecipesContext);
+  const { recipes } = useContext(RecipesContext);
 
   const trueTags = Object.keys(tagsChosen).filter(
     (chosenTag) => tagsChosen[chosenTag]

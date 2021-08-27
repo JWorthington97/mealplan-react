@@ -11,7 +11,7 @@ export default function ShowFavourites({
   cuisineChosen,
   recipeSearch,
 }: ShowRecipesProps): JSX.Element {
-  const { recipes, setRecipes } = useContext(RecipesContext);
+  const { recipes } = useContext(RecipesContext);
   const isLoaded = useContext(IsLoadingContext);
 
   const trueTags = Object.keys(tagsChosen).filter(
