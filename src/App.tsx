@@ -6,7 +6,8 @@ import {
 } from "react-router-dom";
 import RecipeHome from "./components/Recipes/RecipeHome";
 import SignInScreen from "./Firebase/SignIn";
-import firebase from 'firebase/app';
+import { initializeApp } from 'firebase/app';
+import { getAuth, onAuthStateChanged, User } from 'firebase/auth'
 import { firebaseConfig } from "./Firebase/config";  
 import { createContext, useState, useEffect } from "react";
 import MenuBarMobile from "./components/MenuBarMobile";
@@ -15,9 +16,10 @@ import FavouritesHome from "./components/Favourites/FavouritesHome";
 import { ICuisine, IRecipe, IRecipeFormatted } from "./Types";
 
 //Contexts
-export const firebaseApp = firebase.initializeApp(firebaseConfig); 
+export const firebaseApp = initializeApp(firebaseConfig); 
+export const auth = getAuth(firebaseApp)
 export const IsLoadingContext = createContext(true)
-export const UserContext = createContext<firebase.User | undefined>(undefined) 
+export const UserContext = createContext<User | undefined>(undefined) 
 
 type TRecipe = {
   recipes: IRecipeFormatted[], 
@@ -28,7 +30,7 @@ export const CuisinesContext = createContext<ICuisine[]>([])
 
 function App() { 
   const [isLoading, setIsLoading] = useState(true)
-  const [user, setUser] = useState<firebase.User | undefined>(undefined)
+  const [user, setUser] = useState<User | undefined>(undefined)
   const [isDesktop] = useMediaQuery("(min-width: 1280px)")
   const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
   const [cuisines, setCuisines] = useState<ICuisine[]>([])
@@ -60,7 +62,9 @@ function App() {
     getCuisines();
   }, []);
 
-  firebase.auth().onAuthStateChanged((user) => {
+  
+
+  onAuthStateChanged(auth, user => {
     setIsLoading(false)
     if (user) {
       setUser(user)
@@ -75,6 +79,8 @@ function App() {
     <IsLoadingContext.Provider value={isLoading}>
       <RecipesContext.Provider value={{recipes, setRecipes}}>
         <CuisinesContext.Provider value={cuisines}>
+        <Box backgroundColor="#fefefb"> 
+
       <Box width="100%" maxWidth="1024px" margin="auto">
         <Router>
           <Skeleton isLoaded={!isLoading}>
@@ -111,6 +117,7 @@ function App() {
             </Route>
           </Switch>
         </Router>
+      </Box>
       </Box>
       </CuisinesContext.Provider>
       </RecipesContext.Provider>
