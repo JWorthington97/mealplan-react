@@ -1,9 +1,10 @@
-import { Grid, Box, Flex, Text, Image, Skeleton } from "@chakra-ui/react";
+import { Grid, Box, Flex, Text, Image, Skeleton, IconButton } from "@chakra-ui/react";
 import { useContext } from "react";
 import FavouritesButton from "../Favourites/FavouritesButton";
 import { RecipeTag } from "../Misc/RecipeTag";
 import { titleCase } from "title-case";
 import { IsLoadingContext, SpecialsContext } from "../../App";
+import { GiMeal } from "react-icons/gi";
 
 export default function ShowSpecials(): JSX.Element {
   const isLoaded = useContext(IsLoadingContext);
@@ -18,7 +19,19 @@ export default function ShowSpecials(): JSX.Element {
               w={["45vw", "45vw", "30vw", "20vw", "10vw"]}
               m={["2vw", "2vw", "2vw", "1vw", "1"]}
               key={recipe.id}
+              position="relative" 
             >
+              <Box w="inherit" position="absolute" textAlign="right" p="1" >
+                  <IconButton  
+                      borderWidth="1px"
+                      borderColor="grey"
+                      boxShadow="xl"
+                      aria-label="Add to mealplan"   
+                      backgroundColor="#fefefb"
+                      icon={<GiMeal color="#66CCB5"/>} 
+                      size="sm"
+                    /> 
+                </Box>
               <Image
                 src={recipe.image_url}
                 fallbackSrc={

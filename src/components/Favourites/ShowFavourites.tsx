@@ -1,5 +1,6 @@
-import { SimpleGrid, Box, Skeleton, Flex, Image, Text } from "@chakra-ui/react";
+import { SimpleGrid, Box, Skeleton, Flex, Image, Text, IconButton } from "@chakra-ui/react";
 import { useContext } from "react";
+import { GiMeal } from "react-icons/gi";
 import { titleCase } from "title-case";
 import { IsLoadingContext, RecipesContext } from "../../App";
 import { ShowRecipesProps } from "../../Types";
@@ -42,7 +43,18 @@ export default function ShowFavourites({
           return (
             <Box key={recipe.id}>
               <Skeleton isLoaded={!isLoaded}>
-                <Box w={["45vw", "45vw", "30vw", "20vw", "10vw"]} m="auto">
+                <Box w={["45vw", "45vw", "30vw", "20vw", "10vw"]} position="relative">
+                  <Box w="inherit" position="absolute" textAlign="right" p="1" >
+                    <IconButton  
+                    borderWidth="1px"
+                    borderColor="grey"
+                        boxShadow="xl"
+                        aria-label="Add to mealplan"   
+                        backgroundColor="#fefefb"
+                        icon={<GiMeal color="#66CCB5"/>}  
+                        size="sm"
+                      /> 
+                  </Box>
                   <Image
                     src={recipe.image_url}
                     fallbackSrc={

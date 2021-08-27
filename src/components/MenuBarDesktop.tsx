@@ -64,12 +64,13 @@ export default function MenuBarDesktop(): JSX.Element {
       )}
       <IconButton
         aria-label="Recipeasy logo"
-        as={GiMeal}
+        icon={<GiMeal color="#66CCB5" size="100%"/>} 
         color="primary"
         h={55}
         w={55}
         cursor="pointer"
         variant="unstyled"
+        _focus={{ boxShadow: "none" }}
         onClick={() => history.push("/")}
       />
     </Flex>

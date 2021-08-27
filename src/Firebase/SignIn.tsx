@@ -58,6 +58,7 @@ export default function SignInScreen() {
           .then(() => {
             // Signed in
             // const user = userCredential.user;
+            setFirebaseError("");
             history.push("/");
             // ...
           })

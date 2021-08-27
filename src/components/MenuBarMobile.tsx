@@ -17,13 +17,13 @@ export default function MenuBarMobile(): JSX.Element {
       <Spacer />
       <IconButton
         aria-label="Recipeasy logo"
-        as={GiMeal}
+        icon={<GiMeal color="#66CCB5" size="100%"/>}  
         color="primary"
         h={55}
         w={55}
         variant="unstyled"
         onClick={() => history.push("/")}
       />
-    </Flex>
+    </Flex> 
   );
 }
