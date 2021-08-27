@@ -1,26 +1,13 @@
 import { Grid, Box, Flex, Text, Image, Skeleton } from "@chakra-ui/react";
-import { useState, useEffect, useContext } from "react";
-import { IRecipe } from "../../Types";
+import { useContext } from "react";
 import FavouritesButton from "../Favourites/FavouritesButton";
 import { RecipeTag } from "../Misc/RecipeTag";
 import { titleCase } from "title-case";
-import { IsLoadingContext, UserContext } from "../../App";
+import { IsLoadingContext, SpecialsContext } from "../../App";
 
 export default function ShowSpecials(): JSX.Element {
-  const [specials, setSpecials] = useState<IRecipe[]>([]);
   const isLoaded = useContext(IsLoadingContext);
-  const user = useContext(UserContext);
-
-  useEffect(() => {
-    const getSpecials = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/specials/${user?.uid}`
-      );
-      const body = await response.json();
-      setSpecials(body);
-    };
-    getSpecials();
-  }, [isLoaded, user]);
+  const { specials, setSpecials } = useContext(SpecialsContext) 
 
   return (
     <Skeleton isLoaded={!isLoaded}>
