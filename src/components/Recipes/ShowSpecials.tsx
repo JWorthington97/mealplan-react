@@ -4,7 +4,8 @@ import FavouritesButton from "../Favourites/FavouritesButton";
 import { RecipeTag } from "../Misc/RecipeTag";
 import { titleCase } from "title-case";
 import { IsLoadingContext, RecipesContext } from "../../App";
-import { GiMeal } from "react-icons/gi";
+import { GoPlus } from "react-icons/go";
+import PlanButton from "../Plan/PlanButton";
 
 export default function ShowSpecials(): JSX.Element {
   const isLoaded = useContext(IsLoadingContext);
@@ -25,15 +26,7 @@ export default function ShowSpecials(): JSX.Element {
               position="relative" 
             >
               <Box w="inherit" position="absolute" textAlign="right" p="1" >
-                  <IconButton  
-                      borderWidth="1px"
-                      borderColor="grey"
-                      boxShadow="xl"
-                      aria-label="Add to mealplan"   
-                      backgroundColor="#fefefb"
-                      icon={<GiMeal color="#66CCB5"/>} 
-                      size="sm"
-                    /> 
+                  <PlanButton recipe={recipe} />
                 </Box>
               <Image
                 src={recipe.image_url}
