@@ -9,6 +9,8 @@ export interface IRecipe {
   tags: string;
   infavourites: number;
   specials: number;
+  inplan: number;
+  cooked: number
 }
 
 export interface IRecipeFormatted {
@@ -20,6 +22,8 @@ export interface IRecipeFormatted {
   tags: string[];
   infavourites: number;
   specials: number;
+  inplan: number;
+  cooked: number
 }
 
 export type ExtendTagProps = TagProps & {
@@ -49,3 +53,4 @@ export interface PostAndDeleteFavouritesProps {
   setRecipes(recipes: IRecipeFormatted[]): void;
   recipes: IRecipeFormatted[];
 }
+

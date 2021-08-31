@@ -1,10 +1,10 @@
-import { Box, Flex, Text, Image, SimpleGrid, Skeleton, IconButton } from "@chakra-ui/react";
+import { Box, Flex, Text, Image, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import { useContext } from "react";
 import { ShowRecipesProps } from "../../Types";
 import FavouritesButton from "../Favourites/FavouritesButton";
 import { titleCase } from "title-case";
 import { IsLoadingContext, RecipesContext } from "../../App";
-import { GiMeal } from "react-icons/gi";
+import PlanButton from "../Plan/PlanButton";
 
 export default function ShowRecipes({
   tagsChosen,
@@ -45,16 +45,8 @@ export default function ShowRecipes({
               <Skeleton isLoaded={!isLoaded}>
                 <Box w={["45vw", "45vw", "30vw", "20vw", "10vw"]} m="auto" position="relative">
                   <Box w="inherit" position="absolute" textAlign="right" p="1" >
-                    <IconButton  
-                    borderWidth="1px"
-                    borderColor="grey"
-                        boxShadow="xl"
-                        aria-label="Add to mealplan"   
-                        backgroundColor="#fefefb"
-                        icon={<GiMeal color="#66CCB5"/>} 
-                        size="sm"
-                      /> 
-                  </Box>                  
+                    <PlanButton recipe={recipe} />
+                  </Box>                   
                   <Image
                     src={recipe.image_url}
                     fallbackSrc={
