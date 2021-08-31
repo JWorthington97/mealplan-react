@@ -9,7 +9,7 @@ import { createContext, useState, useEffect } from "react";
 import MenuBarMobile from "./components/MenuBarMobile";
 import MenuBarDesktop from "./components/MenuBarDesktop";
 import FavouritesHome from "./components/Favourites/FavouritesHome";
-import { ICuisine, IRecipe, IRecipeFormatted } from "./Types";
+import { ICuisine, IRecipe, IRecipeFormatted } from "./Types"; 
 
 //Contexts
 export const firebaseApp = initializeApp(firebaseConfig);
@@ -41,6 +41,8 @@ function App() {
   const [user, setUser] = useState<User | undefined>(undefined);  
   const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
   const [cuisines, setCuisines] = useState<ICuisine[]>([]);  
+  console.log("app component rendering")
+  console.log(user)
 
   // Get Recipes. Potential to join specials flag onto this as well
   useEffect(() => {
@@ -52,10 +54,11 @@ function App() {
       const formatted: IRecipeFormatted[] = body.map((recipe: IRecipe) => {
         return { ...recipe, tags: recipe.tags.split(", ") };
       });
+      console.log("in use effect getRecipes")
       setRecipes(formatted);
     };
     getRecipes();
-  }, [isLoading, user]); // is loading here might need to be not here
+  }, [user]); 
 
   // Get Cuisines
   useEffect(() => {
@@ -64,16 +67,24 @@ function App() {
         `${process.env.REACT_APP_BACKEND_URL}/cuisines`
       );
       const body = await response.json();
+      console.log("cuisines")
       setCuisines(body);
+      
     };
     getCuisines();
   }, []);
 
-  onAuthStateChanged(auth, (user) => {
-    setIsLoading(false);
-    if (user) {
-      setUser(user);
-    } else {
+  useEffect(() => {
+    if (isLoading) {
+      setIsLoading(false);
+    }
+  }, [user, isLoading]) 
+  
+  onAuthStateChanged(auth, (OnAuthUser) => {
+    if (OnAuthUser) {
+      setUser(OnAuthUser);
+    } 
+    else {
       setUser(undefined); 
     }
   });

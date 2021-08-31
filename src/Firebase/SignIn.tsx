@@ -16,8 +16,9 @@ import {
   Box,
   Flex,
   Divider,
-  createStandaloneToast,
+  createStandaloneToast
 } from "@chakra-ui/react";
+import PasswordReset from "./PasswordReset";
 
 type Inputs = {
   email: string;
@@ -77,7 +78,6 @@ export default function SignInScreen() {
             // const errorCode = error.code;
             const errorMessage = error.message;
             // ..
-            console.log(error.message);
             setFirebaseError(errorMessage);
           });
   };
@@ -129,6 +129,7 @@ export default function SignInScreen() {
               </Button>
             </FormControl>
           </form>
+          <PasswordReset />
           {firebaseError && <Box color="red">{firebaseError}</Box>}
         </Box>
         {/* } */}
