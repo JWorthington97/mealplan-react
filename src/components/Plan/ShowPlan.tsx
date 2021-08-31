@@ -1,21 +1,24 @@
-import { Grid, Box, Flex, Text, Image, Skeleton } from "@chakra-ui/react";
+import { Skeleton, Box, Image, Flex, Text, SimpleGrid, Select} from "@chakra-ui/react";
 import { useContext } from "react";
-import FavouritesButton from "../Favourites/FavouritesButton";
-import { RecipeTag } from "../Misc/RecipeTag";
-import { titleCase } from "title-case";
 import { IsLoadingContext, RecipesContext } from "../../App";
-import PlanButton from "../Plan/PlanButton";
+import FavouritesButton from "../Favourites/FavouritesButton";
+import PlanButton from "./PlanButton";
+import { titleCase } from "title-case";
+import { RecipeTag } from "../Misc/RecipeTag";
 
-export default function ShowSpecials(): JSX.Element {
+export default function ShowPlan(): JSX.Element {
   const isLoaded = useContext(IsLoadingContext);
   // const { specials, setSpecials } = useContext(SpecialsContext) 
   const { recipes } = useContext(RecipesContext)
 
   return (
     <Skeleton isLoaded={!isLoaded}>
-      <Grid overflowX="auto" gridAutoFlow="column">
-        {recipes
-        .filter((recipe) => recipe.specials === 1)
+      <SimpleGrid
+      minChildWidth={["45vw", "45vw", "30vw", "20vw", "10vw"]}
+      m={["2vw", "2vw", "2vw", "1vw", "1"]}
+    >
+        {recipes 
+        .filter((recipe) => recipe.inplan === 1)
         .map((recipe) => {
           return (
             <Box
@@ -51,14 +54,17 @@ export default function ShowSpecials(): JSX.Element {
                   recipe={{ ...recipe, cuisine: 0, tags: [] }}
      
                 />
-                {/* <IconButton
-                    aria-label="Add to mealplan"
-                    // backgroundColor="teal"
-                    icon={<GiMeal color="#66CCB5" />} 
-                    size="sm"
-                  /> */}
-                {/* </Flex> */}
+                
               </Flex>
+              <Select placeholder="Choose day..." mb="1" variant="flushed" borderBottomColor="black" borderBottomWidth="1">
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+                <option value="7">Sunday</option>
+                </Select>
               <Flex flexWrap="wrap">
                 {recipe.tags
                   .sort()
@@ -77,7 +83,7 @@ export default function ShowSpecials(): JSX.Element {
             </Box>
           );
         })}
-      </Grid>
+      </SimpleGrid>
     </Skeleton>
   );
 }

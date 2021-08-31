@@ -1,10 +1,9 @@
-import { Box, Flex, Text, Image, SimpleGrid, Skeleton, IconButton } from "@chakra-ui/react";
+import { Box, Flex, Text, Image, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import { useContext } from "react";
 import { ShowRecipesProps } from "../../Types";
 import FavouritesButton from "../Favourites/FavouritesButton";
 import { titleCase } from "title-case";
 import { IsLoadingContext, RecipesContext } from "../../App";
-import { GoPlus } from "react-icons/go";
 import PlanButton from "../Plan/PlanButton";
 
 export default function ShowRecipes({

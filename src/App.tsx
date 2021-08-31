@@ -49,7 +49,7 @@ export const CuisinesContext = createContext<ICuisine[]>([]);
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isDesktop] = useMediaQuery("(min-width: 1280px)");
-  const [user, setUser] = useState<User | undefined>(undefined);  
+  const [user, setUser] = useState<User | undefined>(undefined);   
   const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
   const [cuisines, setCuisines] = useState<ICuisine[]>([]);  
   // const [planRecipes, setPlanRecipes] = useState<IRecipeFormatted[]>([])
