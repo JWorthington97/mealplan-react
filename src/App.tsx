@@ -97,10 +97,10 @@ function App() {
   }, []);
 
   useEffect(() => { //10
-    if (recipes) {
+    if (recipes && isLoading) {
       setIsLoading(false);
     }
-  }, [recipes])
+  }, [recipes, isLoading])
  
   return (
     <UserContext.Provider value={user}>

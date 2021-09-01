@@ -1,15 +1,17 @@
 import { Skeleton, Box, Image, Flex, Text, SimpleGrid, Select} from "@chakra-ui/react";
 import { useContext } from "react";
-import { IsLoadingContext, RecipesContext } from "../../App";
+import { IsLoadingContext, RecipesContext, UserContext } from "../../App";
 import FavouritesButton from "../Favourites/FavouritesButton";
 import PlanButton from "./PlanButton";
 import { titleCase } from "title-case";
 import { RecipeTag } from "../Misc/RecipeTag";
+import patchPlanDay from "./patchPlanDay";
 
 export default function ShowPlan(): JSX.Element {
   const isLoaded = useContext(IsLoadingContext);
   // const { specials, setSpecials } = useContext(SpecialsContext) 
-  const { recipes } = useContext(RecipesContext)
+  const { recipes, setRecipes } = useContext(RecipesContext)
+  const user = useContext(UserContext)
 
   return (
     <Skeleton isLoaded={!isLoaded}>
@@ -19,15 +21,43 @@ export default function ShowPlan(): JSX.Element {
     >
         {recipes 
         .filter((recipe) => recipe.inplan === 1)
+        .sort((a, b) => a.day - b.day)  
         .map((recipe) => {
-          return (
+          return ( 
             <Box
               w={["45vw", "45vw", "30vw", "20vw", "10vw"]}
               m={["2vw", "2vw", "2vw", "1vw", "1"]}
               key={recipe.id}
               position="relative" 
-            >
+            > 
+              <Select 
+              defaultValue={recipe.day}
+              mb="1"
+              variant="flushed" 
+              borderBottomColor="black"  
+              borderBottomWidth="1"
+              // Need to add in logic that sets state locally depending on whether received 200 from patchPlanDay
+              onChange={(e) => {setRecipes(recipes.map((mapRecipe) => {
+                if (mapRecipe.id === recipe.id) {
+                  return {...mapRecipe, day: parseInt(e.target.value)}
+                }
+                else { 
+                  return mapRecipe
+                }
+              }));
+              patchPlanDay(parseInt(e.target.value), recipe.id, user?.uid || "")}}
+              >
+                <option value="8">Choose day...</option>
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+                <option value="7">Sunday</option>
+                </Select>
               <Box w="inherit" position="absolute" textAlign="right" p="1" >
+                
                   <PlanButton recipe={recipe} />
                 </Box>
               <Image
@@ -54,18 +84,7 @@ export default function ShowPlan(): JSX.Element {
                   recipe={{ ...recipe, cuisine: 0, tags: [] }}
      
                 />
-                
               </Flex>
-              <Select placeholder="Choose day..." mb="1" variant="flushed" borderBottomColor="black" borderBottomWidth="1">
-                  {/* onChange here to post request. Need to update setRecipes and also the main recipes query */}
-                <option value="1">Monday</option>
-                <option value="2">Tuesday</option>
-                <option value="3">Wednesday</option>
-                <option value="4">Thursday</option>
-                <option value="5">Friday</option>
-                <option value="6">Saturday</option>
-                <option value="7">Sunday</option>
-                </Select>
               <Flex flexWrap="wrap">
                 {recipe.tags
                   .sort()
