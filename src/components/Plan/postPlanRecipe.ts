@@ -49,10 +49,10 @@ export default async function postPlanRecipe({
     if (response.status === 201) {
         const newRecipes = recipes!.map((recipe) =>
           recipe.id === recipeID
-            ? { ...recipe, inplan: recipe.inplan ? 0 : 1 }
+            ? { ...recipe, inplan: 1 }
             : { ...recipe }
         );
-        setRecipes!(newRecipes);
+        setRecipes(newRecipes);
     }
     else {
         toastMessage = {

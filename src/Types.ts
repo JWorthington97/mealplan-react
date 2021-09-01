@@ -10,7 +10,8 @@ export interface IRecipe {
   infavourites: number;
   specials: number;
   inplan: number;
-  cooked: number
+  cooked: number | null;
+  day: number
 }
 
 export interface IRecipeFormatted {
@@ -23,7 +24,8 @@ export interface IRecipeFormatted {
   infavourites: number;
   specials: number;
   inplan: number;
-  cooked: number
+  cooked: number | null;
+  day: number 
 }
 
 export type ExtendTagProps = TagProps & {
