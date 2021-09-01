@@ -16,7 +16,7 @@ import PlanHome from "./components/Plan/PlanHome";
 export const firebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(firebaseApp);
 export const IsLoadingContext = createContext(true);
-export const UserContext = createContext<User | undefined>(undefined);
+export const UserContext = createContext<User | undefined | null>(undefined);
 
 type TRecipe = {
   recipes: IRecipeFormatted[];
@@ -47,18 +47,26 @@ export const SpecialsContext = createContext<TSpecial>({
 export const CuisinesContext = createContext<ICuisine[]>([]);
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isDesktop] = useMediaQuery("(min-width: 1280px)");
-  const [user, setUser] = useState<User | undefined>(undefined);   
-  const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
-  const [cuisines, setCuisines] = useState<ICuisine[]>([]);  
+  const [isLoading, setIsLoading] = useState(true); // 1
+  const [isDesktop] = useMediaQuery("(min-width: 1280px)"); // 2 // 3
+  const [user, setUser] = useState<User | undefined | null>(null); //4  
+  const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]); //5
+  const [cuisines, setCuisines] = useState<ICuisine[]>([]);  //6
   // const [planRecipes, setPlanRecipes] = useState<IRecipeFormatted[]>([])
-  console.log("app component rendering")
-  console.log(user)
-  // console.log(planRecipes)
+
+  useEffect(() => { //7
+    onAuthStateChanged(auth, (OnAuthUser) => {
+      if (OnAuthUser) {
+        setUser(OnAuthUser);
+      }  
+      else {
+        setUser(undefined);  
+      }
+    });
+  }, [])
 
   // Get Recipes. Potential to join specials flag onto this as well
-  useEffect(() => {
+  useEffect(() => { //8
     const getRecipes = async () => {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/recipes/${user?.uid}`
@@ -67,41 +75,33 @@ function App() {
       const formatted: IRecipeFormatted[] = body.map((recipe: IRecipe) => {
         return { ...recipe, tags: recipe.tags.split(", ") };
       });
-      console.log("in use effect getRecipes")
       setRecipes(formatted);
     };
-    getRecipes();
+    if (user !== null) {
+      getRecipes();
+    }
+    
   }, [user]); 
 
   // Get Cuisines
-  useEffect(() => {
+  useEffect(() => { //9
     const getCuisines = async () => {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/cuisines`
       );
-      const body = await response.json();
-      console.log("cuisines")
+      const body = await response.json()
       setCuisines(body);
       
     };
     getCuisines();
   }, []);
 
-  useEffect(() => {
-    if (isLoading) {
+  useEffect(() => { //10
+    if (recipes) {
       setIsLoading(false);
     }
-  }, [user, isLoading]) 
-  
-  onAuthStateChanged(auth, (OnAuthUser) => {
-    if (OnAuthUser) {
-      setUser(OnAuthUser);
-    } 
-    else {
-      setUser(undefined);  
-    }
-  });
-
+  }, [recipes])
+ 
   return (
     <UserContext.Provider value={user}>
       <IsLoadingContext.Provider value={isLoading}>

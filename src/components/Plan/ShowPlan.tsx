@@ -57,6 +57,7 @@ export default function ShowPlan(): JSX.Element {
                 
               </Flex>
               <Select placeholder="Choose day..." mb="1" variant="flushed" borderBottomColor="black" borderBottomWidth="1">
+                  {/* onChange here to post request. Need to update setRecipes and also the main recipes query */}
                 <option value="1">Monday</option>
                 <option value="2">Tuesday</option>
                 <option value="3">Wednesday</option>
