@@ -11,6 +11,7 @@ import {
   } from "@chakra-ui/react"
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
+import { theme } from "../styles/theme";
 
 type Inputs = {
     email: string;
@@ -28,7 +29,7 @@ export default function PasswordReset(): JSX.Element {
     .then(() => {
         // Password reset email sent!
         // ..
-        const toast = createStandaloneToast();
+        const toast = createStandaloneToast({theme: theme});
         toast({
             title: "Password reset email sent",
             // description: "We have sent an email to reset your password.",
