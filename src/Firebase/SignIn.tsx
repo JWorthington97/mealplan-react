@@ -19,6 +19,7 @@ import {
   createStandaloneToast
 } from "@chakra-ui/react";
 import PasswordReset from "./PasswordReset";
+import { theme } from "../styles/theme";
 
 type Inputs = {
   email: string;
@@ -63,7 +64,7 @@ export default function SignInScreen() {
             // const user = userCredential.user;
             setFirebaseError("");
             sendEmailVerification(userCredential.user) 
-            const toast = createStandaloneToast();
+            const toast = createStandaloneToast({theme: theme});
             toast({
               title: "Account created!",
               description: "We have sent an email with a confirmation link to your email address.",

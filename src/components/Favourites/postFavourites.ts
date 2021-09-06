@@ -1,5 +1,6 @@
 import { createStandaloneToast } from "@chakra-ui/react";
 import { PostAndDeleteFavouritesProps } from "../../Types";
+import { theme } from '../../styles/theme'
 
 type toastStatus = "success" | "info" | "warning" | "error" | undefined;
 
@@ -48,7 +49,7 @@ export default async function postFavourites({
     }
   }
 
-  const toast = createStandaloneToast();
+  const toast = createStandaloneToast({ theme: theme });
   toast({
     title: toastMessage.title,
     status: toastMessage.status,
