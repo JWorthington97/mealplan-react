@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "../src/styles/theme";
+import "@fontsource/montserrat/400.css"
 
 ReactDOM.render(
   <React.StrictMode>
