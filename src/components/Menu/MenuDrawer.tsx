@@ -1,7 +1,7 @@
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link as RouterLink } from "react-router-dom";
 import { useContext, useRef } from "react";
-import SignOut from "../Firebase/SignOut";
+import SignOut from "../../Firebase/SignOut";
 
 import {
   Drawer,
@@ -18,7 +18,7 @@ import {
   LinkProps,
   forwardRef,
 } from "@chakra-ui/react";
-import { UserContext } from "../App";
+import { UserContext } from "../../App";
 
 export default function MenuDrawer(): JSX.Element {
   const user = useContext(UserContext);

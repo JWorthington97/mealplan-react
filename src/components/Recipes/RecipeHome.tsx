@@ -81,6 +81,7 @@ export default function RecipeHome(): JSX.Element {
         <HStack
           mx={["2vw", "2vw", "2vw", "1vw", 0]}
           my={["2vw", "2vw", "2vw", "2vw", "1em"]}
+          overflowX="auto"
         >
           {Object.keys(tagsChosen).map((tag) => {
             return (

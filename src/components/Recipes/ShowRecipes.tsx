@@ -67,19 +67,9 @@ export default function ShowRecipes({
                     >
                       {titleCase(recipe.name)}
                     </Text>
-                    {/* <Flex m={["1vw", "1vw", "1vw", "1vw", "2%"]}> */}
                     <FavouritesButton
                       recipe={recipe}
-                      // setRecipes={setRecipes}
-                      // recipes={recipes}
                     />
-                    {/* <IconButton
-                      aria-label="Add to mealplan"   
-                      // backgroundColor="teal"
-                      icon={<GiMeal color="#66CCB5" />} 
-                      size="sm"
-                    /> */}
-                    {/* </Flex> */}
                   </Flex>
                 </Box>
               </Skeleton>

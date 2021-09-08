@@ -9,9 +9,9 @@ import {
 } from "@chakra-ui/react";
 import { GiMeal } from "react-icons/gi";
 import { Link as RouterLink, useHistory } from "react-router-dom";
-import SignOut from "../Firebase/SignOut";
+import SignOut from "../../Firebase/SignOut";
 import { useEffect, useContext } from "react";
-import { UserContext } from "../App";
+import { UserContext } from "../../App";
 
 export default function MenuBarDesktop(): JSX.Element {
   const user = useContext(UserContext);

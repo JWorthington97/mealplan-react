@@ -6,11 +6,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import { firebaseConfig } from "./Firebase/config";
 import { createContext, useState, useEffect } from "react";
-import MenuBarMobile from "./components/MenuBarMobile";
-import MenuBarDesktop from "./components/MenuBarDesktop";
+import MenuBarMobile from "./components/Menu/MenuBarMobile";
+import MenuBarDesktop from "./components/Menu/MenuBarDesktop";
 import FavouritesHome from "./components/Favourites/FavouritesHome";
 import { ICuisine, IRecipe, IRecipeFormatted } from "./Types"; 
 import PlanHome from "./components/Plan/PlanHome";
+import AddHome from "./components/Add/AddHome";
 
 //Contexts
 export const firebaseApp = initializeApp(firebaseConfig);
@@ -127,7 +128,7 @@ function App() {
                         </Route>
                         <Route path="/add">
                           <Box textAlign="center" m="auto">
-                            Add
+                            <AddHome />
                           </Box>
                         </Route>
                         <Route path="/plan">

@@ -27,7 +27,7 @@ export default function ShowFavourites({
         // Filtering on Cuisine
         .filter((recipe) => recipe.infavourites === 1)
         .filter(
-          (recipe) =>
+          (recipe) => 
             recipe.cuisine === parseInt(cuisineChosen) || cuisineChosen === ""
         )
         // Filtering on Tags
