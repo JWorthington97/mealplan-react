@@ -32,21 +32,6 @@ export default async function postPlanRecipe({
       }
     );
 
-    // const body = await response.json();
-
-    // if (body.message.includes("duplicate")) {
-    //   toastMessage = {
-    //     title: "Already in your favourites!", 
-    //     status: "info",
-    //   };
-    // } else {
-    //   const newRecipes = recipes!.map((recipe) =>
-    //       recipe.id === recipeID
-    //         ? { ...recipe, infavourites: recipe.infavourites ? 0 : 1 }
-    //         : { ...recipe }
-    //     );
-    //   setRecipes!(newRecipes);
-    // }
     if (response.status === 201) {
         const newRecipes = recipes!.map((recipe) =>
           recipe.id === recipeID

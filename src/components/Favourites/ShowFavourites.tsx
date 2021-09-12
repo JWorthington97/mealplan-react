@@ -69,16 +69,7 @@ export default function ShowFavourites({
                     </Text>
                     <FavouritesButton
                       recipe={recipe}
-                      // setRecipes={setRecipes}
-                      // recipes={recipes}
                     />
-                    {/* <IconButton
-                          aria-label="Add to mealplan"   
-                          // backgroundColor="teal"
-                          icon={<GiMeal color="#66CCB5" />} 
-                          size="sm"
-                        /> */}
-                    {/* </Flex> */}
                   </Flex>
                 </Box>
               </Skeleton>

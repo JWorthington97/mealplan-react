@@ -11,7 +11,6 @@ export default function ShowRecipes({
   cuisineChosen,
   recipeSearch,
 }: ShowRecipesProps): JSX.Element {
-  // const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
   const isLoaded = useContext(IsLoadingContext);
   const { recipes } = useContext(RecipesContext);
 

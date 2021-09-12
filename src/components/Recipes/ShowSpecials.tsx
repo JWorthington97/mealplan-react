@@ -8,7 +8,6 @@ import PlanButton from "../Plan/PlanButton";
 
 export default function ShowSpecials(): JSX.Element {
   const isLoaded = useContext(IsLoadingContext);
-  // const { specials, setSpecials } = useContext(SpecialsContext) 
   const { recipes } = useContext(RecipesContext)
 
   return (
@@ -51,13 +50,6 @@ export default function ShowSpecials(): JSX.Element {
                   recipe={{ ...recipe, cuisine: 0, tags: [] }}
      
                 />
-                {/* <IconButton
-                    aria-label="Add to mealplan"
-                    // backgroundColor="teal"
-                    icon={<GiMeal color="#66CCB5" />} 
-                    size="sm"
-                  /> */}
-                {/* </Flex> */}
               </Flex>
               <Flex flexWrap="wrap">
                 {recipe.tags

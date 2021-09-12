@@ -11,7 +11,6 @@ import MenuBarDesktop from "./components/Menu/MenuBarDesktop";
 import FavouritesHome from "./components/Favourites/FavouritesHome";
 import { ICuisine, IRecipe, IRecipeFormatted } from "./Types"; 
 import PlanHome from "./components/Plan/PlanHome";
-import AddHome from "./components/Add/AddHome";
 
 //Contexts
 export const firebaseApp = initializeApp(firebaseConfig);
@@ -27,10 +26,7 @@ type TSpecial = {
   specials: IRecipe[];
   setSpecials(specials: IRecipe[]): void;
 };
-// type TPlanRecipe = {
-//   planRecipes: IRecipeFormatted[];
-//   setPlanRecipes(planRecipes: IRecipeFormatted[]): void;
-// };
+
 export const RecipesContext = createContext<TRecipe>({
   recipes: [],
   setRecipes: () => console.log(),
@@ -40,22 +36,16 @@ export const SpecialsContext = createContext<TSpecial>({
   setSpecials: () => console.log()
 })
 
-// export const PlanRecipesContext = createContext<TPlanRecipe>({
-//   planRecipes: [],
-//   setPlanRecipes: () => console.log(), 
-// });
-
 export const CuisinesContext = createContext<ICuisine[]>([]);
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true); // 1
-  const [isDesktop] = useMediaQuery("(min-width: 1280px)"); // 2 // 3
-  const [user, setUser] = useState<User | undefined | null>(null); //4  
-  const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]); //5
-  const [cuisines, setCuisines] = useState<ICuisine[]>([]);  //6
-  // const [planRecipes, setPlanRecipes] = useState<IRecipeFormatted[]>([])
+  const [isLoading, setIsLoading] = useState(true);
+  const [isDesktop] = useMediaQuery("(min-width: 1280px)");
+  const [user, setUser] = useState<User | undefined | null>(null);
+  const [recipes, setRecipes] = useState<IRecipeFormatted[]>([]);
+  const [cuisines, setCuisines] = useState<ICuisine[]>([]);
 
-  useEffect(() => { //7
+  useEffect(() => {
     onAuthStateChanged(auth, (OnAuthUser) => {
       if (OnAuthUser) {
         setUser(OnAuthUser);
@@ -67,7 +57,7 @@ function App() {
   }, [])
 
   // Get Recipes. Potential to join specials flag onto this as well
-  useEffect(() => { //8
+  useEffect(() => {
     const getRecipes = async () => {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/recipes/${user?.uid}`
@@ -85,7 +75,7 @@ function App() {
   }, [user]); 
 
   // Get Cuisines
-  useEffect(() => { //9
+  useEffect(() => {
     const getCuisines = async () => {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/cuisines`
@@ -97,7 +87,7 @@ function App() {
     getCuisines();
   }, []);
 
-  useEffect(() => { //10
+  useEffect(() => {
     if (recipes && isLoading) {
       setIsLoading(false);
     }
@@ -107,7 +97,6 @@ function App() {
     <UserContext.Provider value={user}>
       <IsLoadingContext.Provider value={isLoading}>
         <RecipesContext.Provider value={{ recipes, setRecipes }}>
-          {/* <PlanRecipesContext.Provider value={{planRecipes, setPlanRecipes}}> */}
               <CuisinesContext.Provider value={cuisines}>
                 <Box backgroundColor="#fefefb">
                   <Box width="100%" maxWidth="1024px" minHeight="100vh" margin="auto">
@@ -128,7 +117,7 @@ function App() {
                         </Route>
                         <Route path="/add">
                           <Box textAlign="center" m="auto">
-                            <AddHome />
+                            Add
                           </Box>
                         </Route>
                         <Route path="/plan">
@@ -150,7 +139,6 @@ function App() {
                   </Box>
                 </Box> 
               </CuisinesContext.Provider>
-            {/* </PlanRecipesContext.Provider> */}
         </RecipesContext.Provider>
       </IsLoadingContext.Provider>
     </UserContext.Provider>

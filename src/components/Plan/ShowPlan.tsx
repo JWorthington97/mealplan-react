@@ -9,7 +9,6 @@ import patchPlanDay from "./patchPlanDay";
 
 export default function ShowPlan(): JSX.Element {
   const isLoaded = useContext(IsLoadingContext);
-  // const { specials, setSpecials } = useContext(SpecialsContext) 
   const { recipes, setRecipes } = useContext(RecipesContext)
   const user = useContext(UserContext)
 
@@ -36,7 +35,6 @@ export default function ShowPlan(): JSX.Element {
               variant="flushed" 
               borderBottomColor="black"  
               borderBottomWidth="1"
-              // Need to add in logic that sets state locally depending on whether received 200 from patchPlanDay
               onChange={(e) => {setRecipes(recipes.map((mapRecipe) => {
                 if (mapRecipe.id === recipe.id) {
                   return {...mapRecipe, day: parseInt(e.target.value)}

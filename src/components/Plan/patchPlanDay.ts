@@ -1,5 +1,4 @@
 export default async function patchPlanDay(dayID: number, recipeID: number, userID: string) {
-    // const response = 
     await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/plan`,
         {

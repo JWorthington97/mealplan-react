@@ -25,31 +25,31 @@ export const variants: { [key: string]: any } = {
     backgroundColor: "darkmagenta",
     color: "white",
   },
-  easySelected: {
+  easyUnselected: {
     tagName: "Easy",
     backgroundColor: "white",
     color: "crimson",
     type: "outline",
   },
-  weeknightSelected: {
+  weeknightUnselected: {
     tagName: "Weeknight",
     backgroundColor: "white",
     color: "gold",
     type: "outline",
   },
-  vegetarianSelected: {
+  vegetarianUnselected: {
     tagName: "Vegetarian",
     backgroundColor: "white",
     color: "mediumseagreen",
     type: "outline",
   },
-  veganSelected: {
+  veganUnselected: {
     tagName: "Vegan",
     backgroundColor: "white",
     color: "steelblue",
     type: "outline",
   },
-  leftoversSelected: {
+  leftoversUnselected: {
     tagName: "Leftovers",
     backgroundColor: "white",
     color: "darkmagenta",

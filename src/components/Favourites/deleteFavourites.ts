@@ -32,7 +32,6 @@ export default async function deleteFavourites({
           }
         );
     
-        // const body = await response.json();
         if (response.status !== 200) {
             toastMessage = {
                 title: "Unable to remove from favourites",

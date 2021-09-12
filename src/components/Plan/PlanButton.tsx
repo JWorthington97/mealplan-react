@@ -6,13 +6,11 @@ import { RecipesContext, UserContext } from "../../App";
 import { IRecipeFormatted } from "../../Types";
 import postPlanRecipe from "./postPlanRecipe";
 import deletePlanRecipe from "./deletePlanRecipe";
-// import { PlanRecipesContext } from '../../App'
 
 interface PlanRecipesProps {
     recipe: IRecipeFormatted
 }
 export default function PlanRecipes({ recipe } : PlanRecipesProps): JSX.Element {
-    // const { planRecipes, setPlanRecipes } = useContext(PlanRecipesContext)
     const user = useContext(UserContext)
     const toast = useToast();
     const { id, inplan } = recipe

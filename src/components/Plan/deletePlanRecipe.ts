@@ -31,8 +31,7 @@ export default async function deletePlanRecipe({
             body: JSON.stringify({ recipeID, userID }),
           }
         );
-    
-        // const body = await response.json();
+
         if (response.status !== 200) {
             toastMessage = {
                 title: "Unable to remove from plan",
