@@ -36,7 +36,7 @@ export default function MenuBarDesktop(): JSX.Element {
     <Flex>
       <Flex>
         <Heading color="primary" margin="auto">
-          Recipeasy
+          Personal Project
         </Heading>
       </Flex>
       <Spacer />
@@ -63,7 +63,7 @@ export default function MenuBarDesktop(): JSX.Element {
         </Link>
       )}
       <IconButton
-        aria-label="Recipeasy logo"
+        aria-label="personal project logo"
         icon={<GiMeal color="#66CCB5" size="100%"/>} 
         color="primary"
         h={55}

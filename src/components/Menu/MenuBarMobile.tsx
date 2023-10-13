@@ -11,12 +11,12 @@ export default function MenuBarMobile(): JSX.Element {
       <Spacer />
       <Flex>
         <Heading color="primary" margin="auto">
-          Recipeasy
+          Personal Project
         </Heading>
       </Flex>
       <Spacer />
       <IconButton
-        aria-label="Recipeasy logo"
+        aria-label="Personal project logo"
         icon={<GiMeal color="#66CCB5" size="100%"/>}  
         color="primary"
         h={55}
