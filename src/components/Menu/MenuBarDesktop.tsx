@@ -41,10 +41,10 @@ export default function MenuBarDesktop(): JSX.Element {
       </Flex>
       <Spacer />
       <Flex margin="auto" textAlign="center">
-        <NavBarLink to="/">Recipes</NavBarLink>
-        <NavBarLink to="/favourites">Favourites</NavBarLink>
+        {/* <NavBarLink to="/">Recipes</NavBarLink> */}
+        {/* <NavBarLink to="/favourites">Favourites</NavBarLink>
         <NavBarLink to="/plan">Plan</NavBarLink>
-        <NavBarLink to="/add">Add</NavBarLink>
+        <NavBarLink to="/add">Add</NavBarLink> */}
       </Flex>
       <Spacer />
       {user ? (
@@ -64,7 +64,7 @@ export default function MenuBarDesktop(): JSX.Element {
       )}
       <IconButton
         aria-label="personal project logo"
-        icon={<GiMeal color="#66CCB5" size="100%"/>} 
+        // icon={<GiMeal color="#66CCB5" size="100%"/>} 
         color="primary"
         h={55}
         w={55}

@@ -53,7 +53,7 @@ export default function MenuDrawer(): JSX.Element {
             what's on the menu?
           </DrawerHeader>
           <DrawerBody>
-            <HamburgerLink to="/">Recipes</HamburgerLink>
+            {/* <HamburgerLink to="/">Recipes</HamburgerLink>
             <HamburgerLink to="/favourites">Favourites</HamburgerLink>
             <HamburgerLink to="/plan">Plan</HamburgerLink>
             <HamburgerLink to="/add">Add</HamburgerLink>
@@ -61,7 +61,7 @@ export default function MenuDrawer(): JSX.Element {
               <SignOut onClose={onClose} />
             ) : (
               <HamburgerLink to="/signin">Sign In</HamburgerLink>
-            )}
+            )} */}
             <Box mt="10vh">{user?.displayName}</Box>
           </DrawerBody>
         </DrawerContent>

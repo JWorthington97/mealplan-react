@@ -1,16 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+// import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "../src/styles/theme";
 import "@fontsource/montserrat/400.css"
+import BlankApp from "./BlankApp";
 
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <App />
+      {/* <App /> */}
+      <BlankApp />
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root")

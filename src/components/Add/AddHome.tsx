@@ -21,7 +21,8 @@ export default function AddHome(): JSX.Element {
     src={recipeImage} 
     boxSize={["45vw", "45vw", "30vw", "20vw", "10vw"]} 
     borderTopRadius="10"
-    fallbackSrc={process.env.PUBLIC_URL + 'meal.png'} />
+    // fallbackSrc={process.env.PUBLIC_URL + 'meal.png'}
+     />
     <Text textAlign="left">Sample recipe name</Text>
     <Flex flexWrap="wrap">
     {Object.keys(tagsChosen).sort().map((tag) => {

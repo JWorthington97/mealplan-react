@@ -17,7 +17,7 @@ export default function MenuBarMobile(): JSX.Element {
       <Spacer />
       <IconButton
         aria-label="Personal project logo"
-        icon={<GiMeal color="#66CCB5" size="100%"/>}  
+        // icon={<GiMeal color="#66CCB5" size="100%"/>}  
         color="primary"
         h={55}
         w={55}
